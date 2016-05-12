@@ -85,6 +85,5 @@ D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\Microsoft.Owin.Security.G
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\Microsoft.Owin.Security.Twitter.xml
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\System.Web.Http.Owin.xml
-D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.csprojResolveAssemblyReference.cache
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.dll
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.pdb
