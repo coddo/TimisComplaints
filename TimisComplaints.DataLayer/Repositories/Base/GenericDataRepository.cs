@@ -8,21 +8,21 @@ using TimisComplaints.DataLayer.Interfaces;
 
 namespace TimisComplaints.DataLayer.Repositories.Base
 {
-    public class GenericDataRepository<T> : IDisposable
+    public abstract class GenericDataRepository<T> : IDisposable
         where T : class, IEntity, new()
     {
         private readonly Entities mContext;
         private readonly DbSet<T> mDbSet;
 
-        protected internal GenericDataRepository()
+        protected GenericDataRepository()
         {
             mContext = new Entities();
             mDbSet = mContext.Set<T>();
         }
 
-        public virtual Entities Context => mContext;
+        protected virtual Entities Context => mContext;
 
-        protected virtual async Task<IList<T>> GetAllAsync(IList<string> navigationProperties = null)
+        protected virtual async Task<IList<T>> FetchAllAsync(IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -30,7 +30,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return list;
         }
 
-        protected virtual async Task<IList<T>> GetListAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
+        protected virtual async Task<IList<T>> FetchListAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -39,7 +39,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return list;
         }
 
-        protected virtual async Task<T> GetSingleAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
+        protected virtual async Task<T> FetchSingleAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -90,14 +90,14 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return items;
         }
 
-        protected virtual async Task DeleteAsync(T item)
+        protected virtual async Task RemoveAsync(T item)
         {
             mDbSet.Remove(item);
 
             await mContext.SaveChangesAsync();
         }
 
-        protected virtual async Task DeleteAsync(IEnumerable<T> items)
+        protected virtual async Task RemoveAsync(IEnumerable<T> items)
         {
             mDbSet.RemoveRange(items);
 
