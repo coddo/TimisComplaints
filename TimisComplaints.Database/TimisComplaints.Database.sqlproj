@@ -68,7 +68,5 @@
     <Build Include="dbo\Tables\Letters.sql" />
     <Build Include="dbo\Tables\Districts.sql" />
     <Build Include="dbo\Tables\DistrictProblemAssignments.sql" />
-    <Build Include="Security\timis.sql" />
-    <Build Include="Security\RoleMemberships.sql" />
   </ItemGroup>
 </Project>

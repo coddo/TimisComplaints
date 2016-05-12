@@ -87,3 +87,4 @@ D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\Microsoft.Owin.Security.M
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\System.Web.Http.Owin.xml
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.dll
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.pdb
+D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.csprojResolveAssemblyReference.cache
