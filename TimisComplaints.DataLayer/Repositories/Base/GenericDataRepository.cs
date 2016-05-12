@@ -20,9 +20,9 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             mDbSet = mContext.Set<T>();
         }
 
-        protected virtual Entities Context => mContext;
+        protected Entities Context => mContext;
 
-        protected virtual async Task<IList<T>> FetchAllAsync(IList<string> navigationProperties = null)
+        protected async Task<IList<T>> FetchAllAsync(IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -30,7 +30,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return list;
         }
 
-        protected virtual async Task<IList<T>> FetchListAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
+        protected async Task<IList<T>> FetchListAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -39,7 +39,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return list;
         }
 
-        protected virtual async Task<T> FetchSingleAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
+        protected async Task<T> FetchSingleAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
             var dbQuery = GenerateQuery(navigationProperties);
 
@@ -48,7 +48,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return item;
         }
 
-        protected virtual async Task<T> AddAsync(T item)
+        protected async Task<T> AddAsync(T item)
         {
             mDbSet.Add(item);
 
@@ -57,7 +57,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return item;
         }
 
-        protected virtual async Task<IList<T>> AddAsync(IList<T> items)
+        protected async Task<IList<T>> AddAsync(IList<T> items)
         {
             mDbSet.AddRange(items);
 
@@ -66,7 +66,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return items;
         }
 
-        protected virtual async Task<T> ChangeAsync(T item)
+        protected async Task<T> ChangeAsync(T item)
         {
             mContext.Entry(item).State = EntityState.Modified;
 
@@ -75,7 +75,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return item;
         }
 
-        protected virtual async Task<IList<T>> ChangeAsync(IList<T> items)
+        protected async Task<IList<T>> ChangeAsync(IList<T> items)
         {
             mContext.Configuration.AutoDetectChangesEnabled = false;
 
@@ -90,14 +90,14 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return items;
         }
 
-        protected virtual async Task RemoveAsync(T item)
+        protected async Task RemoveAsync(T item)
         {
             mDbSet.Remove(item);
 
             await mContext.SaveChangesAsync();
         }
 
-        protected virtual async Task RemoveAsync(IEnumerable<T> items)
+        protected async Task RemoveAsync(IEnumerable<T> items)
         {
             mDbSet.RemoveRange(items);
 

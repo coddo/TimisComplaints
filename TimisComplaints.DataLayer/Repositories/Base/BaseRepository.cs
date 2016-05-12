@@ -9,17 +9,17 @@ namespace TimisComplaints.DataLayer.Repositories.Base
     public abstract class BaseRepository<T> : GenericDataRepository<T>
         where T : class, IEntity, new()
     {
-        public async Task<IList<T>> GetAllAsync(IList<string> navigationProperties = null)
+        public virtual async Task<IList<T>> GetAllAsync(IList<string> navigationProperties = null)
         {
             return await FetchAllAsync(navigationProperties);
         }
 
-        public async Task<T> GetAsync(Guid id, IList<string> navigationProperties = null)
+        public virtual async Task<T> GetAsync(Guid id, IList<string> navigationProperties = null)
         {
             return await FetchSingleAsync(entity => entity.Id == id, navigationProperties);
         }
 
-        public async Task<T> CreateAsync(T entity)
+        public virtual async Task<T> CreateAsync(T entity)
         {
             if (entity == null)
             {
@@ -34,7 +34,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return await AddAsync(entity);
         }
 
-        public async Task<IList<T>> CreateAsync(IList<T> entities)
+        public virtual async Task<IList<T>> CreateAsync(IList<T> entities)
         {
             if (entities.Any(e => e == null))
             {
@@ -49,7 +49,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return await AddAsync(entities);
         }
 
-        public async Task<T> UpdateAsync(T entity)
+        public virtual async Task<T> UpdateAsync(T entity)
         {
             if (entity == null || entity.Id == Guid.Empty)
             {
@@ -59,7 +59,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return await ChangeAsync(entity);
         }
 
-        public async Task<IList<T>> UpdateAsync(IList<T> entities)
+        public virtual async Task<IList<T>> UpdateAsync(IList<T> entities)
         {
             if (entities.Any(entity => entity == null || entity.Id == Guid.Empty))
             {
@@ -69,7 +69,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return await ChangeAsync(entities);
         }
 
-        public async Task<bool> DeleteAsync(T entity)
+        public virtual async Task<bool> DeleteAsync(T entity)
         {
             if (entity == null || entity.Id == Guid.Empty)
             {
@@ -81,7 +81,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             return true;
         }
 
-        public async Task<bool> DeleteAsync(IList<T> entities)
+        public virtual async Task<bool> DeleteAsync(IList<T> entities)
         {
             if (entities == null || entities.Any(entity => entity == null || entity.Id == Guid.Empty))
             {
