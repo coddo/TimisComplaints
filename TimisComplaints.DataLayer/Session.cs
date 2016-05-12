@@ -13,16 +13,13 @@ namespace TimisComplaints.DataLayer
     using System.Collections.Generic;
     using TimisComplaints.DataLayer.Interfaces;
     
-    public partial class UserProblem : IEntity
+    public partial class Session : IEntity
     {
         public System.Guid Id { get; set; }
         public System.Guid UserId { get; set; }
-        public System.Guid ProblemId { get; set; }
-        public System.Guid DistrictId { get; set; }
-        public int Order { get; set; }
         public System.DateTime Date { get; set; }
+        public string Key { get; set; }
     
-        public virtual Problem Problem { get; set; }
         public virtual User User { get; set; }
     }
 }
