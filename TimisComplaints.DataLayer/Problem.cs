@@ -18,8 +18,8 @@ namespace TimisComplaints.DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Problem()
         {
-            this.UserProblems = new HashSet<UserProblem>();
             this.Districts = new HashSet<District>();
+            this.UserProblems = new HashSet<UserProblem>();
         }
     
         public System.Guid Id { get; set; }
@@ -27,8 +27,8 @@ namespace TimisComplaints.DataLayer
         public string Description { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProblem> UserProblems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<District> Districts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProblem> UserProblems { get; set; }
     }
 }

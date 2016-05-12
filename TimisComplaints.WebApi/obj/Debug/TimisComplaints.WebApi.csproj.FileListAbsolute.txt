@@ -90,3 +90,5 @@ D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.Web
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.csprojResolveAssemblyReference.cache
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.BusinessLogicLayer.dll
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.BusinessLogicLayer.pdb
+D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.dll
+D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.pdb

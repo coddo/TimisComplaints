@@ -17,7 +17,9 @@ namespace TimisComplaints.DataLayer
     {
         public System.Guid Id { get; set; }
         public System.Guid UserId { get; set; }
+        public string Title { get; set; }
         public string Message { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual User User { get; set; }
     }

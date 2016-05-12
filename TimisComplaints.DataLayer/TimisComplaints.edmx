@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TimisComplaintsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TimisComplaintsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DistrictProblemAssignments">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -26,7 +26,9 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Problems">
           <Key>
@@ -36,13 +38,24 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="UserProblems">
           <Key>
@@ -51,7 +64,9 @@
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ProblemId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DistrictId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_DistrictProblemAssignments_Districts">
           <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
@@ -89,6 +104,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Sessions_Users">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserProblems_Problems">
           <End Role="Problems" Type="Self.Problems" Multiplicity="1" />
           <End Role="UserProblems" Type="Self.UserProblems" Multiplicity="*" />
@@ -118,6 +145,7 @@
           <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Letters" EntityType="Self.Letters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Problems" EntityType="Self.Problems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProblems" EntityType="Self.UserProblems" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DistrictProblemAssignments_Districts" Association="Self.FK_DistrictProblemAssignments_Districts">
@@ -132,6 +160,10 @@
             <End Role="User" EntitySet="User" />
             <End Role="Letters" EntitySet="Letters" />
           </AssociationSet>
+          <AssociationSet Name="FK_Sessions_Users" Association="Self.FK_Sessions_Users">
+            <End Role="User" EntitySet="User" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserProblems_Problems" Association="Self.FK_UserProblems_Problems">
             <End Role="Problems" EntitySet="Problems" />
             <End Role="UserProblems" EntitySet="UserProblems" />
@@ -141,47 +173,105 @@
             <End Role="UserProblems" EntitySet="UserProblems" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TimisComplaintsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="TimisComplaintsModel.District" />
+          <EntitySet Name="Problems" EntityType="TimisComplaintsModel.Problem" />
+          <EntitySet Name="Sessions" EntityType="TimisComplaintsModel.Session" />
+          <EntitySet Name="Users" EntityType="TimisComplaintsModel.User" />
+          <AssociationSet Name="FK_Sessions_Users" Association="TimisComplaintsModel.FK_Sessions_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="DistrictProblemAssignments" Association="TimisComplaintsModel.DistrictProblemAssignments">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Problem" EntitySet="Problems" />
+          </AssociationSet>
+          <EntitySet Name="Letters" EntityType="TimisComplaintsModel.Letter" />
+          <EntitySet Name="UserProblems" EntityType="TimisComplaintsModel.UserProblem" />
+          <AssociationSet Name="FK_Letters_Users" Association="TimisComplaintsModel.FK_Letters_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Letter" EntitySet="Letters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProblems_Problems" Association="TimisComplaintsModel.FK_UserProblems_Problems">
+            <End Role="Problem" EntitySet="Problems" />
+            <End Role="UserProblem" EntitySet="UserProblems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProblems_Users" Association="TimisComplaintsModel.FK_UserProblems_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProblem" EntitySet="UserProblems" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Problems" Relationship="Self.DistrictProblemAssignments" FromRole="Districts" ToRole="Problems" />
-        </EntityType>
-        <EntityType Name="Letter">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Letters_Users" FromRole="Letters" ToRole="User" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Problems" Relationship="TimisComplaintsModel.DistrictProblemAssignments" FromRole="District" ToRole="Problem" />
         </EntityType>
         <EntityType Name="Problem">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserProblems" Relationship="Self.FK_UserProblems_Problems" FromRole="Problems" ToRole="UserProblems" />
-          <NavigationProperty Name="Districts" Relationship="Self.DistrictProblemAssignments" FromRole="Problems" ToRole="Districts" />
+          <NavigationProperty Name="Districts" Relationship="TimisComplaintsModel.DistrictProblemAssignments" FromRole="Problem" ToRole="District" />
+          <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="Problem" ToRole="UserProblem" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Sessions_Users" FromRole="Session" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Letters" Relationship="Self.FK_Letters_Users" FromRole="User" ToRole="Letters" />
-          <NavigationProperty Name="UserProblems" Relationship="Self.FK_UserProblems_Users" FromRole="User" ToRole="UserProblems" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sessions" Relationship="TimisComplaintsModel.FK_Sessions_Users" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="Letters" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="User" ToRole="Letter" />
+          <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="User" ToRole="UserProblem" />
+        </EntityType>
+        <Association Name="FK_Sessions_Users">
+          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DistrictProblemAssignments">
+          <End Type="TimisComplaintsModel.District" Role="District" Multiplicity="*" />
+          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Letter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="Letter" ToRole="User" />
         </EntityType>
         <EntityType Name="UserProblem">
           <Key>
@@ -190,74 +280,49 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="UserId" Type="Guid" Nullable="false" />
           <Property Name="ProblemId" Type="Guid" Nullable="false" />
+          <Property Name="DistrictId" Type="Guid" Nullable="false" />
           <Property Name="Order" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Problem" Relationship="Self.FK_UserProblems_Problems" FromRole="UserProblems" ToRole="Problems" />
-          <NavigationProperty Name="User" Relationship="Self.FK_UserProblems_Users" FromRole="UserProblems" ToRole="User" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Problem" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="UserProblem" ToRole="Problem" />
+          <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="UserProblem" ToRole="User" />
         </EntityType>
         <Association Name="FK_Letters_Users">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Letters" Type="Self.Letter" Multiplicity="*" />
+          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.Letter" Role="Letter" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Letters">
+            <Dependent Role="Letter">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProblems_Problems">
-          <End Role="Problems" Type="Self.Problem" Multiplicity="1" />
-          <End Role="UserProblems" Type="Self.UserProblem" Multiplicity="*" />
+          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.UserProblem" Role="UserProblem" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Problems">
+            <Principal Role="Problem">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserProblems">
+            <Dependent Role="UserProblem">
               <PropertyRef Name="ProblemId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_UserProblems_Users">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="UserProblems" Type="Self.UserProblem" Multiplicity="*" />
+          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.UserProblem" Role="UserProblem" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="UserProblems">
+            <Dependent Role="UserProblem">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="DistrictProblemAssignments">
-          <End Role="Districts" Type="Self.District" Multiplicity="*" />
-          <End Role="Problems" Type="Self.Problem" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Districts" EntityType="Self.District" />
-          <EntitySet Name="Letters" EntityType="Self.Letter" />
-          <EntitySet Name="Problems" EntityType="Self.Problem" />
-          <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="UserProblems" EntityType="Self.UserProblem" />
-          <AssociationSet Name="FK_Letters_Users" Association="Self.FK_Letters_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Letters" EntitySet="Letters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProblems_Problems" Association="Self.FK_UserProblems_Problems">
-            <End Role="Problems" EntitySet="Problems" />
-            <End Role="UserProblems" EntitySet="UserProblems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProblems_Users" Association="Self.FK_UserProblems_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserProblems" EntitySet="UserProblems" />
-          </AssociationSet>
-          <AssociationSet Name="DistrictProblemAssignments" Association="Self.DistrictProblemAssignments">
-            <End Role="Districts" EntitySet="Districts" />
-            <End Role="Problems" EntitySet="Problems" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -266,56 +331,72 @@
           <EntitySetMapping Name="Districts">
             <EntityTypeMapping TypeName="TimisComplaintsModel.District">
               <MappingFragment StoreEntitySet="Districts">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Letters">
-            <EntityTypeMapping TypeName="TimisComplaintsModel.Letter">
-              <MappingFragment StoreEntitySet="Letters">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Problems">
             <EntityTypeMapping TypeName="TimisComplaintsModel.Problem">
               <MappingFragment StoreEntitySet="Problems">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="TimisComplaintsModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TimisComplaintsModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="DistrictProblemAssignments" TypeName="TimisComplaintsModel.DistrictProblemAssignments" StoreEntitySet="DistrictProblemAssignments">
+            <EndProperty Name="Problem">
+              <ScalarProperty Name="Id" ColumnName="ProblemId" />
+            </EndProperty>
+            <EndProperty Name="District">
+              <ScalarProperty Name="Id" ColumnName="DistrictId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Letters">
+            <EntityTypeMapping TypeName="TimisComplaintsModel.Letter">
+              <MappingFragment StoreEntitySet="Letters">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserProblems">
             <EntityTypeMapping TypeName="TimisComplaintsModel.UserProblem">
               <MappingFragment StoreEntitySet="UserProblems">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProblemId" ColumnName="ProblemId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="ProblemId" ColumnName="ProblemId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="DistrictProblemAssignments" TypeName="TimisComplaintsModel.DistrictProblemAssignments" StoreEntitySet="DistrictProblemAssignments">
-            <EndProperty Name="Districts">
-              <ScalarProperty Name="Id" ColumnName="DistrictId" />
-            </EndProperty>
-            <EndProperty Name="Problems">
-              <ScalarProperty Name="Id" ColumnName="ProblemId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
