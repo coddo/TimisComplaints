@@ -18,7 +18,7 @@ namespace TimisComplaints.Controllers
             List<ProblemModel> myList = new List<ProblemModel>();
 
             for (int i = 1; i < 10; i++)
-                myList.Add(new ProblemModel() { Id = i, Name = userName + " prb " + i.ToString() });
+                myList.Add(new ProblemModel() { Id = Guid.NewGuid(), Name = userName + " prb " + i.ToString() });
 
             return Ok(myList);
         }
