@@ -7,6 +7,7 @@
     [Date] DATETIME NOT NULL, 
     CONSTRAINT [PK_UserProblems] PRIMARY KEY CLUSTERED ([Id] ASC),
     CONSTRAINT [FK_UserProblems_Problems] FOREIGN KEY ([ProblemId]) REFERENCES [dbo].[Problems] ([Id]),
-    CONSTRAINT [FK_UserProblems_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id])
+    CONSTRAINT [FK_UserProblems_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id]),
+    CONSTRAINT [FK_UserProblems_Districts] FOREIGN KEY ([DistrictId]) REFERENCES [dbo].[Districts] ([Id])
 );
 

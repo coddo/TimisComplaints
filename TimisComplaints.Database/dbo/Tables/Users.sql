@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[User] (
+﻿CREATE TABLE [dbo].[Users] (
     [Id]       UNIQUEIDENTIFIER NOT NULL,
     [Email]    NVARCHAR (100)   NULL,
     [Password] NVARCHAR (50)    NULL,

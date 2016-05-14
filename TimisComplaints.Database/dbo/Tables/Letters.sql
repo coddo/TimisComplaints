@@ -5,6 +5,6 @@
     [Message] NVARCHAR (MAX)   NOT NULL,
     [Date] DATETIME NOT NULL, 
     CONSTRAINT [PK_Letters] PRIMARY KEY CLUSTERED ([Id] ASC),
-    CONSTRAINT [FK_Letters_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[User] ([Id])
+    CONSTRAINT [FK_Letters_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
 );
 
