@@ -167,3 +167,6 @@ C:\Users\neagu\Desktop\TimisComplaints\TimisComplaints.WebApi\bin\Microsoft.Owin
 C:\Users\neagu\Desktop\TimisComplaints\TimisComplaints.WebApi\bin\System.Web.Http.Owin.xml
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.dll
 D:\WORK\UPT\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.pdb
+C:\Users\neagu\Desktop\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.dll
+C:\Users\neagu\Desktop\TimisComplaints\TimisComplaints.WebApi\bin\TimisComplaints.DataLayer.pdb
+C:\Users\neagu\Desktop\TimisComplaints\TimisComplaints.WebApi\obj\Debug\TimisComplaints.WebApi.csprojResolveAssemblyReference.cache

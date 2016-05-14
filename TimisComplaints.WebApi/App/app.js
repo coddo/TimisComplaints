@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-    var app = angular.module('timisComplaints', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.tooltip']);
+    var app = angular.module('timisComplaints', ['ui.sortable', 'ngResource', 'ngRoute', 'ui.bootstrap', 'ui.bootstrap.tooltip']);
 
     app.config(function ($routeProvider, $locationProvider) {
 

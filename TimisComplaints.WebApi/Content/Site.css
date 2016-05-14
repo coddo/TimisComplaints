@@ -2,6 +2,14 @@
     font-family: 'Open Sans'
 }
 
+.district{
+    padding: 10px;
+}
+
+.btn-district{
+    width:100%;
+}
+
 
 
 /*message*/
@@ -27,7 +35,7 @@
     margin-top: -100px;
     width: 600px;
     height: 200px;
-    background-image: url("/images/loading.png");
+    background-image: url("/Content/Images/loading.gif");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
