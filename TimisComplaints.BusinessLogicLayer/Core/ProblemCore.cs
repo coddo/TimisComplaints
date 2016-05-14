@@ -11,11 +11,7 @@ namespace TimisComplaints.BusinessLogicLayer.Core
         {
             using (var problemRepository = new ProblemRepository())
             {
-                return await problemRepository.GetAllAsync(new []
-                {
-                    nameof(Problem.Districts),
-                    nameof(Problem.UserProblems)
-                });
+                return await problemRepository.GetAllAsync();
             }
         }
     }
