@@ -191,11 +191,11 @@
             <End Role="Problem" EntitySet="Problems" />
           </AssociationSet>
           <EntitySet Name="Letters" EntityType="TimisComplaintsModel.Letter" />
-          <EntitySet Name="UserProblems" EntityType="TimisComplaintsModel.UserProblem" />
           <AssociationSet Name="FK_Letters_Users" Association="TimisComplaintsModel.FK_Letters_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="Letter" EntitySet="Letters" />
           </AssociationSet>
+          <EntitySet Name="UserProblems" EntityType="TimisComplaintsModel.UserProblem" />
           <AssociationSet Name="FK_UserProblems_Problems" Association="TimisComplaintsModel.FK_UserProblems_Problems">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="UserProblem" EntitySet="UserProblems" />
@@ -204,7 +204,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserProblem" EntitySet="UserProblems" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="Id" />
@@ -273,6 +273,18 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="Letter" ToRole="User" />
         </EntityType>
+        <Association Name="FK_Letters_Users">
+          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.Letter" Role="Letter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Letter">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="UserProblem">
           <Key>
             <PropertyRef Name="Id" />
@@ -286,18 +298,6 @@
           <NavigationProperty Name="Problem" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="UserProblem" ToRole="Problem" />
           <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="UserProblem" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Letters_Users">
-          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
-          <End Type="TimisComplaintsModel.Letter" Role="Letter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Letter">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserProblems_Problems">
           <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="1" />
           <End Type="TimisComplaintsModel.UserProblem" Role="UserProblem" Multiplicity="*" />

@@ -12,11 +12,11 @@
         <AssociationConnector Association="TimisComplaintsModel.FK_Sessions_Users" />
         <AssociationConnector Association="TimisComplaintsModel.DistrictProblemAssignments" />
         <EntityTypeShape EntityType="TimisComplaintsModel.Letter" Width="1.5" PointX="6.25" PointY="4.625" />
-        <EntityTypeShape EntityType="TimisComplaintsModel.UserProblem" Width="1.5" PointX="3.5" PointY="3.25" />
         <AssociationConnector Association="TimisComplaintsModel.FK_Letters_Users" />
+        <EntityTypeShape EntityType="TimisComplaintsModel.UserProblem" Width="1.5" PointX="3.375" PointY="2.625" />
         <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Problems" />
         <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Users" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

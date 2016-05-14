@@ -211,10 +211,12 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserProblemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
@@ -314,6 +316,10 @@
     <ProjectReference Include="..\TimisComplaints.BusinessLogicLayer\TimisComplaints.BusinessLogicLayer.csproj">
       <Project>{c7064d14-e25a-46ce-a7a0-4045ad9d5386}</Project>
       <Name>TimisComplaints.BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimisComplaints.DataLayer\TimisComplaints.DataLayer.csproj">
+      <Project>{FFE5D856-0B5A-41B8-88EC-420645D1897B}</Project>
+      <Name>TimisComplaints.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
