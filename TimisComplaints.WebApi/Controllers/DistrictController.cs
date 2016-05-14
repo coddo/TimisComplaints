@@ -8,7 +8,7 @@ namespace TimisComplaints.WebApi.Controllers
     public class DistrictController : ApiController
     {
         [HttpGet]
-        [ActionName("GetProblems/{id}")]
+        [ActionName("GetProblems")]
         public async Task<IHttpActionResult> GetProblemsAsync(Guid id)
         {
             try
