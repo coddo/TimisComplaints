@@ -18,6 +18,17 @@
                 method: 'GET',
                 isArray: false
             },
+            updateUserProblems: {
+                url: baseUrl + 'admin/sourceProviders',
+                method: 'POST',
+                isArray: false
+            },
+            getTest: {
+                url: baseUrl + 'test/test/:userName',
+                method: 'GET',
+                params: { userName: '@userName' },
+                isArray: true
+            },
 
         });
 

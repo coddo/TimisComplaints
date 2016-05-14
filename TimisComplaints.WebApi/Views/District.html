@@ -1,1 +1,21 @@
 ﻿District id: {{districtId}}
+
+
+Topul problemelor mele<br />
+
+<ul ui-sortable="sortableOptions" ng-model="selectedProblems" ng-change="problemsChanged()">
+    <li ng-repeat="prb in selectedProblems ">
+        {{prb.id}}: {{prb.name}}
+    </li>
+</ul>
+
+
+<br />
+Lista de probleme sortata dupa voturi
+<br />
+
+<ul>
+    <li ng-repeat="prb in problems | orderBy:'-id'" ng-click="selectProblem(prb)">
+        {{prb.id}}: {{prb.name}}
+    </li>
+</ul>
