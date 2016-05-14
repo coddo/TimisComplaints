@@ -210,6 +210,8 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -351,6 +353,10 @@
     <ProjectReference Include="..\TimisComplaints.BusinessLogicLayer\TimisComplaints.BusinessLogicLayer.csproj">
       <Project>{c7064d14-e25a-46ce-a7a0-4045ad9d5386}</Project>
       <Name>TimisComplaints.BusinessLogicLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TimisComplaints.DataLayer\TimisComplaints.DataLayer.csproj">
+      <Project>{ffe5d856-0b5a-41b8-88ec-420645d1897b}</Project>
+      <Name>TimisComplaints.DataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
