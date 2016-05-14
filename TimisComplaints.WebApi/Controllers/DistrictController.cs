@@ -11,6 +11,33 @@ namespace TimisComplaints.WebApi.Controllers
     public class DistrictController : ApiController
     {
         [HttpGet]
+        [ActionName("GetAll")]
+        public async Task<IHttpActionResult> GetAllAsync()
+        {
+            try
+            {
+                var districts = await DistrictCore.GetAllAsync();
+                if (districts == null)
+                {
+                    return BadRequest("No districts found");
+                }
+
+                IList<DistrictModel> result = districts.Select(district => new DistrictModel()
+                {
+                    Id = district.Id,
+                    Name = district.Name
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
         [ActionName("GetProblems")]
         public async Task<IHttpActionResult> GetProblemsAsync(Guid id)
         {
@@ -35,6 +62,6 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
     }
 }

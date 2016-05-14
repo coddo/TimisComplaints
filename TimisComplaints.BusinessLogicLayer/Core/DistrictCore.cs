@@ -15,5 +15,13 @@ namespace TimisComplaints.BusinessLogicLayer.Core
                 return await districtRepository.GetProblemsAsync(id);
             }
         }
+
+        public static async Task<IList<District>> GetAllAsync()
+        {
+            using (var districtRepository = new DistrictRepository())
+            {
+                return await districtRepository.GetAllAsync();
+            }
+        }
     }
 }
