@@ -72,3 +72,7 @@
         opacity: 0.5;
     }
 }
+
+tr:hover{
+    background-color:#bababa;
+}
