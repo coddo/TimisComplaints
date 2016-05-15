@@ -8,8 +8,16 @@
 
 
 
+        //HelperService.StartLoading('loadTest');
+        //API.getTest({ userName: 'asdf' }, function (success) {
+        //    $scope.problems = success;
+        //    HelperService.StopLoading('loadTest');
+        //}, function (error) {
+        //    HelperService.StopLoading('loadTest');
+        //});
+
         HelperService.StartLoading('loadTest');
-        API.getTest({ userName: 'asdf' }, function (success) {
+        API.getAllProblems(function (success) {
             $scope.problems = success;
             HelperService.StopLoading('loadTest');
         }, function (error) {
@@ -17,9 +25,17 @@
         });
 
         $scope.selectProblem = function (problem) {
-            $scope.selectedProblems.push(problem);
-
-            $scope.problemsChanged();
+            if ($scope.selectedProblems.indexOf(problem) == -1) {
+                $scope.selectedProblems.push(problem);
+                //var ids = {};
+                //ids.userId = "";
+                //ids.districtId = $scope.districtId;
+                //ids.problemId = problem.id;
+                //API.addSelectedProblem({ids}, function (succes) {
+                //}, function (error) {
+                //});
+                $scope.problemsChanged();
+            }
         }
 
         $scope.problemsChanged = function(){

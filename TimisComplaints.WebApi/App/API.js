@@ -29,6 +29,24 @@
                 params: { userName: '@userName' },
                 isArray: true
             },
+            getAllDistricts: {
+                url: baseUrl + 'district/GetAll',
+                method: 'GET',
+                isArray: true
+            },
+            getAllProblems: {
+                url: baseUrl + 'problem/GetAll',
+                method: 'GET',
+                isArray: true
+            },
+            //addSelectedProblem: {
+            //    url: baseUrl + 'problem/:ids',
+            //    method: 'POST',
+            //    prams: {ids:'@ids'},
+            //    isArray:false
+            //},
+            
+
 
         });
 
