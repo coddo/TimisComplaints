@@ -8,6 +8,14 @@ namespace TimisComplaints.BusinessLogicLayer.Core
 {
     public static class DistrictCore
     {
+        public static async Task<District> GetAsync(Guid id)
+        {
+            using (var districtRepository = new DistrictRepository())
+            {
+                return await districtRepository.GetAsync(id);
+            }
+        }
+
         public static async Task<IList<Problem>> GetProblemsAsync(Guid id)
         {
             using (var districtRepository = new DistrictRepository())
