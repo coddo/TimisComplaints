@@ -52,6 +52,7 @@
     <Compile Include="Core\DistrictCore.cs" />
     <Compile Include="Core\LetterCore.cs" />
     <Compile Include="Core\ProblemCore.cs" />
+    <Compile Include="Core\SessionCore.cs" />
     <Compile Include="Core\UserCore.cs" />
     <Compile Include="Core\UserProblemCore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
