@@ -46,11 +46,11 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid id)
+        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid userId)
         {
             try
             {
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(id);
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(userId);
                 if (userProblems == null)
                 {
                     return BadRequest("No problems found");
