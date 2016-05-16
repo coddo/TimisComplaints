@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
@@ -40,6 +42,33 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
+
+        [HttpGet]
+        [ActionName("GetAll")]
+        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid userId)
+        {
+            try
+            {
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(userId);
+                if (userProblems == null)
+                {
+                    return BadRequest("No problems found");
+                }
+
+                IList<ProblemModel> result = userProblems.Select(userProblem => new ProblemModel()
+                {
+                    Id = userProblem.Problem.Id,
+                    Name = userProblem.Problem.Name,
+                    Description = userProblem.Problem.Description
+                }).ToList();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }
