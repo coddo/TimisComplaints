@@ -31,5 +31,15 @@ namespace TimisComplaints.BusinessLogicLayer.Core
                 return await userProblemRepository.UpdateOrderAsync(userProblems);
             }
         }
+
+        public static async Task<bool> DeleteAsync(Guid id)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                var userProblemToDelete = await userProblemRepository.GetAsync(id);
+
+                return await userProblemRepository.DeleteAsync(userProblemToDelete);
+            }
+        } 
     }
 }
