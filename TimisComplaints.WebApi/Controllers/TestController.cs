@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;
+using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
 namespace TimisComplaints.WebApi.Controllers
 {
-    public class TestController : ApiController
+    public class TestController : IdentityInjectedController
     {
         [HttpGet]
         [ActionName("Test")]
-        public async Task<IHttpActionResult> TestAsync(string userName)
+        public async Task<IHttpActionResult> Test(string userName)
         {
             return await Task.Run(() =>
             {

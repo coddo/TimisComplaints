@@ -1,9 +1,0 @@
-﻿CREATE TABLE [dbo].[Sessions] (
-    [Id]       UNIQUEIDENTIFIER NOT NULL,
-    [UserId] UNIQUEIDENTIFIER NOT NULL, 
-    [Date] DATETIME NOT NULL, 
-    [Key] NVARCHAR(MAX) NOT NULL, 
-    CONSTRAINT [PK_Sessions] PRIMARY KEY CLUSTERED ([Id] ASC),
-	 CONSTRAINT [FK_Sessions_Users] FOREIGN KEY ([UserId]) REFERENCES [dbo].[Users] ([Id])
-);
-

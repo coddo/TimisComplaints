@@ -5,15 +5,16 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
+using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
 namespace TimisComplaints.WebApi.Controllers
 {
-    public class UserProblemController : ApiController
+    public class UserProblemController : IdentityInjectedController
     {
         [HttpPost]
         [ActionName("Create")]
-        public async Task<IHttpActionResult> CreateAsync([FromBody] UserProblemModel model)
+        public async Task<IHttpActionResult> Create([FromBody] UserProblemModel model)
         {
             try
             {
@@ -22,12 +23,13 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var userProblem = new UserProblem()
+                var userProblem = new UserProblem
                 {
                     UserId = model.UserId,
                     ProblemId = model.ProblemId,
                     DistrictId = model.DistrictId,
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    Order = model.Order
                 };
 
                 var result = await UserProblemCore.CreateAsync(userProblem);
@@ -46,7 +48,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public async Task<IHttpActionResult> DeleteAsync(Guid id)
+        public async Task<IHttpActionResult> Delete(Guid id)
         {
             try
             {
@@ -66,7 +68,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("UpdateOrder")]
-        public async Task<IHttpActionResult> UpdateOrder([FromBody] IList<UserProblemModel> model)
+        public async Task<IHttpActionResult> UpdateOrder([FromBody] IEnumerable<UserProblemModel> model)
         {
             try
             {
@@ -97,17 +99,17 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid userId)
+        public async Task<IHttpActionResult> GetAll()
         {
             try
             {
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(userId);
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id);
                 if (userProblems == null)
                 {
                     return BadRequest("No problems found");
                 }
 
-                IList<UserProblemModel> result = userProblems.Select(userProblem => new UserProblemModel()
+                var resultModel = userProblems.Select(userProblem => new UserProblemModel
                 {
                     Id = userProblem.Id,
                     UserId = userProblem.UserId,
@@ -118,7 +120,7 @@ namespace TimisComplaints.WebApi.Controllers
                     Order = userProblem.Order
                 }).ToList();
 
-                return Ok(result);
+                return Ok(resultModel);
             }
             catch (Exception ex)
             {

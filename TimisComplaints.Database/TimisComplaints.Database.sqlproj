@@ -69,7 +69,6 @@
     <Build Include="dbo\Tables\Letters.sql" />
     <Build Include="dbo\Tables\Districts.sql" />
     <Build Include="dbo\Tables\DistrictProblemAssignments.sql" />
-    <Build Include="dbo\Tables\Sessions.sql" />
     <None Include="dbo\Scripts\AddDistricts.sql" />
     <None Include="dbo\Scripts\AddProblems.sql" />
   </ItemGroup>

@@ -4,15 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
+using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
 namespace TimisComplaints.WebApi.Controllers
 {
-    public class DistrictController : ApiController
+    public class DistrictController : IdentityInjectedController
     {
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAllAsync()
+        public async Task<IHttpActionResult> GetAll()
         {
             try
             {
@@ -38,11 +39,11 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetProblems")]
-        public async Task<IHttpActionResult> GetProblemsAsync(Guid id)
+        public async Task<IHttpActionResult> GetProblems(Guid districtId)
         {
             try
             {
-                var problems = await DistrictCore.GetProblemsAsync(id);
+                var problems = await DistrictCore.GetProblemsAsync(districtId);
                 if (problems == null)
                 {
                     return BadRequest("No problems found");

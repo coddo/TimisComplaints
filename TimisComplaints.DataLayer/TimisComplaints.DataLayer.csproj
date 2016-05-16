@@ -67,12 +67,8 @@
     <Compile Include="Repositories\DistrictRepository.cs" />
     <Compile Include="Repositories\LetterRepository.cs" />
     <Compile Include="Repositories\ProblemRepository.cs" />
-    <Compile Include="Repositories\SessionRepository.cs" />
     <Compile Include="Repositories\UserProblemRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Session.cs">
-      <DependentUpon>TimisComplaints.tt</DependentUpon>
-    </Compile>
     <Compile Include="TimisComplaints.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
