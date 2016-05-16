@@ -14,35 +14,49 @@ namespace TimisComplaints.WebApi.Controllers
         [ActionName("GetAll")]
         public async Task<IHttpActionResult> GetAll()
         {
-            var letters = await LetterCore.GetAllAsync();
+            try
+            {
+                var letters = await LetterCore.GetAllAsync();
 
-            return Ok(letters);
+                return Ok(letters);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         [HttpPost]
         [ActionName("Create")]
         public async Task<IHttpActionResult> Create([FromBody] LetterModel model)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var letter = new Letter
+                {
+                    UserId = Identity.Id,
+                    Date = DateTime.Now,
+                    Message = model.Message,
+                    Title = model.Title
+                };
+
+                letter = await LetterCore.CreateAsync(letter);
+                if (letter == null)
+                {
+                    return InternalServerError();
+                }
+
+                return Ok(letter);
             }
-
-            var letter = new Letter
+            catch (Exception ex)
             {
-                UserId = Identity.Id,
-                Date = DateTime.Now,
-                Message = model.Message,
-                Title = model.Title
-            };
-
-            letter = await LetterCore.CreateAsync(letter);
-            if (letter == null)
-            {
-                return InternalServerError();
+                return InternalServerError(ex);
             }
-
-            return Ok(letter);
         }
     }
 }
