@@ -87,11 +87,15 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("No problems found");
                 }
 
-                IList<ProblemModel> result = userProblems.Select(userProblem => new ProblemModel()
+                IList<UserProblemModel> result = userProblems.Select(userProblem => new UserProblemModel()
                 {
-                    Id = userProblem.Problem.Id,
+                    Id = userProblem.Id,
+                    UserId = userProblem.UserId,
+                    ProblemId = userProblem.ProblemId,
+                    DistrictId = userProblem.DistrictId,
                     Name = userProblem.Problem.Name,
-                    Description = userProblem.Problem.Description
+                    Description = userProblem.Problem.Description,
+                    Order = userProblem.Order
                 }).ToList();
 
                 return Ok(result);
