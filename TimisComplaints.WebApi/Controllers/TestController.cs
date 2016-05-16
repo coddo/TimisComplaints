@@ -11,7 +11,7 @@ namespace TimisComplaints.WebApi.Controllers
     {
         [HttpGet]
         [ActionName("Test")]
-        public async Task<IHttpActionResult> TestAsync(string userName)
+        public async Task<IHttpActionResult> Test(string userName)
         {
             return await Task.Run(() =>
             {

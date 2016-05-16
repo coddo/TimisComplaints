@@ -13,7 +13,7 @@ namespace TimisComplaints.WebApi.Controllers
     {
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAllAsync()
+        public async Task<IHttpActionResult> GetAll()
         {
             try
             {
@@ -39,7 +39,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetProblems")]
-        public async Task<IHttpActionResult> GetProblemsAsync(Guid districtId)
+        public async Task<IHttpActionResult> GetProblems(Guid districtId)
         {
             try
             {

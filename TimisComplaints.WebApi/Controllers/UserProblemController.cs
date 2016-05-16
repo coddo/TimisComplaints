@@ -14,7 +14,7 @@ namespace TimisComplaints.WebApi.Controllers
     {
         [HttpPost]
         [ActionName("Create")]
-        public async Task<IHttpActionResult> CreateAsync([FromBody] UserProblemModel model)
+        public async Task<IHttpActionResult> Create([FromBody] UserProblemModel model)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public async Task<IHttpActionResult> DeleteAsync(Guid id)
+        public async Task<IHttpActionResult> Delete(Guid id)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAllAsync()
+        public async Task<IHttpActionResult> GetAll()
         {
             try
             {
