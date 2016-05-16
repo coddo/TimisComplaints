@@ -19,7 +19,6 @@ namespace TimisComplaints.DataLayer
         public User()
         {
             this.Letters = new HashSet<Letter>();
-            this.Sessions = new HashSet<Session>();
             this.UserProblems = new HashSet<UserProblem>();
         }
     
@@ -31,8 +30,6 @@ namespace TimisComplaints.DataLayer
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Letter> Letters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Session> Sessions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProblem> UserProblems { get; set; }
     }

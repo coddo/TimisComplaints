@@ -38,15 +38,6 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="Sessions">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Key" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityType Name="UserProblems">
           <Key>
             <PropertyRef Name="Id" />
@@ -104,18 +95,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Sessions_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Sessions" Type="Self.Sessions" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Sessions">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_UserProblems_Districts">
           <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
           <End Role="UserProblems" Type="Self.UserProblems" Multiplicity="*" />
@@ -157,7 +136,6 @@
           <EntitySet Name="Districts" EntityType="Self.Districts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Letters" EntityType="Self.Letters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Problems" EntityType="Self.Problems" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Sessions" EntityType="Self.Sessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProblems" EntityType="Self.UserProblems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_DistrictProblemAssignments_Districts" Association="Self.FK_DistrictProblemAssignments_Districts">
@@ -171,10 +149,6 @@
           <AssociationSet Name="FK_Letters_Users" Association="Self.FK_Letters_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Letters" EntitySet="Letters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sessions_Users" Association="Self.FK_Sessions_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Sessions" EntitySet="Sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProblems_Districts" Association="Self.FK_UserProblems_Districts">
             <End Role="Districts" EntitySet="Districts" />
@@ -197,7 +171,6 @@
           <EntitySet Name="Districts" EntityType="TimisComplaintsModel.District" />
           <EntitySet Name="Letters" EntityType="TimisComplaintsModel.Letter" />
           <EntitySet Name="Problems" EntityType="TimisComplaintsModel.Problem" />
-          <EntitySet Name="Sessions" EntityType="TimisComplaintsModel.Session" />
           <EntitySet Name="UserProblems" EntityType="TimisComplaintsModel.UserProblem" />
           <EntitySet Name="Users" EntityType="TimisComplaintsModel.User" />
           <AssociationSet Name="FK_UserProblems_Districts" Association="TimisComplaintsModel.FK_UserProblems_Districts">
@@ -211,10 +184,6 @@
           <AssociationSet Name="FK_UserProblems_Problems" Association="TimisComplaintsModel.FK_UserProblems_Problems">
             <End Role="Problem" EntitySet="Problems" />
             <End Role="UserProblem" EntitySet="UserProblems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Sessions_Users" Association="TimisComplaintsModel.FK_Sessions_Users">
-            <End Role="User" EntitySet="Users" />
-            <End Role="Session" EntitySet="Sessions" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProblems_Users" Association="TimisComplaintsModel.FK_UserProblems_Users">
             <End Role="User" EntitySet="Users" />
@@ -255,16 +224,6 @@
           <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="Problem" ToRole="UserProblem" />
           <NavigationProperty Name="Districts" Relationship="TimisComplaintsModel.DistrictProblemAssignments" FromRole="Problem" ToRole="District" />
         </EntityType>
-        <EntityType Name="Session">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="UserId" Type="Guid" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Key" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Sessions_Users" FromRole="Session" ToRole="User" />
-        </EntityType>
         <EntityType Name="UserProblem">
           <Key>
             <PropertyRef Name="Id" />
@@ -289,7 +248,6 @@
           <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Letters" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="User" ToRole="Letter" />
-          <NavigationProperty Name="Sessions" Relationship="TimisComplaintsModel.FK_Sessions_Users" FromRole="User" ToRole="Session" />
           <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="User" ToRole="UserProblem" />
         </EntityType>
         <Association Name="FK_UserProblems_Districts">
@@ -325,18 +283,6 @@
             </Principal>
             <Dependent Role="UserProblem">
               <PropertyRef Name="ProblemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Sessions_Users">
-          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
-          <End Type="TimisComplaintsModel.Session" Role="Session" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Session">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -386,16 +332,6 @@
               <MappingFragment StoreEntitySet="Problems">
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Sessions">
-            <EntityTypeMapping TypeName="TimisComplaintsModel.Session">
-              <MappingFragment StoreEntitySet="Sessions">
-                <ScalarProperty Name="Key" ColumnName="Key" />
-                <ScalarProperty Name="Date" ColumnName="Date" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
