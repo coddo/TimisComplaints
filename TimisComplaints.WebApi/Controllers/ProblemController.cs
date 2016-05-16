@@ -67,7 +67,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("Create")]
-        public async Task<IHttpActionResult> CreateAsync([FromBody]ProblemModel model)
+        public async Task<IHttpActionResult> CreateAsync([FromBody] ProblemModel model)
         {
             try
             {
@@ -98,7 +98,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("Update")]
-        public async Task<IHttpActionResult> UpdateAsync([FromBody]ProblemModel model)
+        public async Task<IHttpActionResult> UpdateAsync([FromBody] ProblemModel model)
         {
             try
             {
@@ -148,6 +148,6 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
     }
 }

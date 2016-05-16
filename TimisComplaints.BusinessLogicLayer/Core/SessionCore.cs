@@ -12,6 +12,6 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await sessionRepository.GetUserAsync(key);
             }
-        } 
+        }
     }
 }

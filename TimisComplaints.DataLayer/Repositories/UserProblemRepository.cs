@@ -23,11 +23,11 @@ namespace TimisComplaints.DataLayer.Repositories
             }
 
             return true;
-        } 
+        }
 
         public async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId)
         {
-            var userProblems = await FetchListAsync(p => p.UserId == userId, new []
+            var userProblems = await FetchListAsync(p => p.UserId == userId, new[]
             {
                 nameof(UserProblem.Problem)
             });

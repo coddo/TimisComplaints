@@ -25,6 +25,6 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
     }
 }

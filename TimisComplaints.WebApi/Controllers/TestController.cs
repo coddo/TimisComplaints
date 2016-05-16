@@ -1,26 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.WebApi.Models;
 
-namespace TimisComplaints.Controllers
+namespace TimisComplaints.WebApi.Controllers
 {
-    [RoutePrefix("api/test")]
     public class TestController : ApiController
     {
-        [Route("test/{userName}")]
         [HttpGet]
-        public IHttpActionResult Test(string userName)
+        [ActionName("Test")]
+        public async Task<IHttpActionResult> TestAsync(string userName)
         {
+            return await Task.Run(() =>
+            {
+                var myList = new List<ProblemModel>();
 
-            List<ProblemModel> myList = new List<ProblemModel>();
+                for (var i = 1; i < 10; i++)
+                {
+                    myList.Add(new ProblemModel()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = userName + " prb " + i.ToString()
+                    });
+                }
 
-            for (int i = 1; i < 10; i++)
-                myList.Add(new ProblemModel() { Id = Guid.NewGuid(), Name = userName + " prb " + i.ToString() });
-
-            return Ok(myList);
+                return Ok(myList);
+            });
         }
     }
 }

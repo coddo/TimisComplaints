@@ -32,7 +32,6 @@ namespace TimisComplaints.WebApi.Controllers
             }
             catch (Exception ex)
             {
-
                 return InternalServerError(ex);
             }
         }

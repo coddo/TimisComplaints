@@ -14,7 +14,7 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await problemRepository.GetAsync(id);
             }
-        } 
+        }
 
         public static async Task<IList<Problem>> GetAllAsync()
         {
@@ -48,6 +48,6 @@ namespace TimisComplaints.BusinessLogicLayer.Core
 
                 return await problemRepository.DeleteAsync(problemToDelete);
             }
-        } 
+        }
     }
 }

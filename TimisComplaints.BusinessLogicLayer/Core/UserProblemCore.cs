@@ -14,7 +14,7 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await userProblemRepository.CreateAsync(userProblem);
             }
-        } 
+        }
 
         public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId)
         {

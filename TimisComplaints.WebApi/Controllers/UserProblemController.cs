@@ -13,7 +13,7 @@ namespace TimisComplaints.WebApi.Controllers
     {
         [HttpPost]
         [ActionName("Create")]
-        public async Task<IHttpActionResult> CreateAsync([FromBody]UserProblemModel model)
+        public async Task<IHttpActionResult> CreateAsync([FromBody] UserProblemModel model)
         {
             try
             {
@@ -21,7 +21,7 @@ namespace TimisComplaints.WebApi.Controllers
                 {
                     return BadRequest(ModelState);
                 }
-                
+
                 var userProblem = new UserProblem()
                 {
                     UserId = model.UserId,
@@ -42,11 +42,11 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
 
         [HttpPost]
         [ActionName("UpdateOrder")]
-        public async Task<IHttpActionResult> UpdateOrder([FromBody]IList<UserProblemModel> model)
+        public async Task<IHttpActionResult> UpdateOrder([FromBody] IList<UserProblemModel> model)
         {
             try
             {

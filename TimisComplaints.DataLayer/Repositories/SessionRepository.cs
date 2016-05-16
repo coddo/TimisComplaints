@@ -7,7 +7,7 @@ namespace TimisComplaints.DataLayer.Repositories
     {
         public async Task<User> GetUserAsync(string key)
         {
-            var session = await FetchSingleAsync(s => s.Key == key, new []
+            var session = await FetchSingleAsync(s => s.Key == key, new[]
             {
                 nameof(Session.User)
             });

@@ -13,6 +13,6 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await userRepository.GetAsync(id);
             }
-        } 
+        }
     }
 }
