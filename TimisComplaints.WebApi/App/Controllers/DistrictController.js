@@ -1,32 +1,29 @@
 ﻿angular
     .module('timisComplaints')
-    .controller('DistrictController', function (AuthService, $routeParams, $scope, API, HelperService) {
-        
+    .controller('DistrictController', function (AuthService, $routeParams, $scope, API, HelperService, $timeout) {
+
         $scope.districtId = $routeParams.districtId;
 
         $scope.selectedProblems = [];
 
 
-
-        //HelperService.StartLoading('loadTest');
-        //API.getTest({ userName: 'asdf' }, function (success) {
-        //    $scope.problems = success;
-        //    HelperService.StopLoading('loadTest');
-        //}, function (error) {
-        //    HelperService.StopLoading('loadTest');
-        //});
-
-        HelperService.StartLoading('loadTest');
+        HelperService.StartLoading('loadProblems');
         API.getAllProblems(function (success) {
             $scope.problems = success;
-            HelperService.StopLoading('loadTest');
+            HelperService.StopLoading('loadProblems');
+
+            //Load user's problem
+
+
         }, function (error) {
-            HelperService.StopLoading('loadTest');
+            HelperService.StopLoading('loadProblems');
+            HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
         });
 
-        $scope.selectProblem = function (problem) {
+        $scope.selectProblem = function (problem, $event) {
             if ($scope.selectedProblems.indexOf(problem) == -1) {
                 $scope.selectedProblems.push(problem);
+                problem.selected = true;
                 //var ids = {};
                 //ids.userId = "";
                 //ids.districtId = $scope.districtId;
@@ -35,67 +32,41 @@
                 //}, function (error) {
                 //});
                 $scope.problemsChanged();
+
+                //if ($scope.selectedProblems.length > 1) {
+                //    var scrollHeight = $($event.target).parent().innerHeight();
+                //    window.scrollBy(0, scrollHeight);
+                //}
             }
         }
 
-        $scope.problemsChanged = function(){
-            console.log($scope.selectedProblems);
+        $scope.removeProblem = function (problem, $event) {
+            var index = $scope.selectedProblems.indexOf(problem);
+            if (index >= 0) {
+                $scope.selectedProblems.splice(index, 1);
+                problem.selected = false;
+
+                $scope.problemsChanged();
+
+                //if ($event && $scope.selectedProblems.length > 0) {
+                //    var scrollHeight = $($event.target).parent().innerHeight();
+                //    window.scrollBy(0, -scrollHeight);
+                //}
+            }
+        }
+
+        $scope.problemsChanged = function () {
+            $scope.selectedProblems.forEach(function (prb, index) {
+                prb.order = index;
+            });
+
+            //TODO: Upload order
         }
 
 
         $scope.sortableOptions = {
-            //activate: function () {
-            //    console.log("activate");
-            //},
-            //beforeStop: function () {
-            //    console.log("beforeStop");
-            //},
-            //change: function () {
-            //    console.log("change");
-            //},
-            //create: function () {
-            //    console.log("create");
-            //},
-            //deactivate: function () {
-            //    console.log("deactivate");
-            //},
-            //out: function () {
-            //    console.log("out");
-            //},
-            //over: function () {
-            //    console.log("over");
-            //},
-            //receive: function () {
-            //    console.log("receive");
-            //},
-            //remove: function () {
-            //    console.log("remove");
-            //},
-            //sort: function () {
-            //    console.log("sort");
-            //},
-            //start: function () {
-            //    console.log("start");
-            //},
-            //update: function (e, ui) {
-            //    console.log("update");
-
-            //    //var logEntry = tmpList.map(function (i) {
-            //    //    return i.value;
-            //    //}).join(', ');
-            //    //$scope.sortingLog.push('Update: ' + logEntry);
-            //},
             stop: function (e, ui) {
-                console.log("stop");
-
-                // this callback has the changed model
-                //var logEntry = tmpList.map(function (i) {
-                //    return i.value;
-                //}).join(', ');
-                //$scope.sortingLog.push('Stop: ' + logEntry);
-
                 $scope.problemsChanged();
-
             }
         };
 
