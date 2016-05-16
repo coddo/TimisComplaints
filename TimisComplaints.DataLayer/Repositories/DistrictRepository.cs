@@ -8,9 +8,9 @@ namespace TimisComplaints.DataLayer.Repositories
 {
     public class DistrictRepository : BaseRepository<District>
     {
-        public async Task<IList<Problem>> GetProblemsAsync(Guid id)
+        public async Task<IList<Problem>> GetProblemsAsync(Guid districtId)
         {
-            var district = await GetAsync(id, new[]
+            var district = await GetAsync(districtId, new[]
             {
                 nameof(District.Problems)
             });

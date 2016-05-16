@@ -68,7 +68,7 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpPost]
         [ActionName("UpdateOrder")]
-        public async Task<IHttpActionResult> UpdateOrder([FromBody] IList<UserProblemModel> model)
+        public async Task<IHttpActionResult> UpdateOrder([FromBody] IEnumerable<UserProblemModel> model)
         {
             try
             {
