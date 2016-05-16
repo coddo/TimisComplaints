@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Base\IdentityInjectedController.cs" />
     <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\LetterController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserProblemController.cs" />
