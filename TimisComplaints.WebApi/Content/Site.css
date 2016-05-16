@@ -1,15 +1,53 @@
 ﻿body {
-    font-family: 'Open Sans'
+    font-family: 'Open Sans';
 }
 
-.district{
+.district {
     padding: 10px;
 }
 
-.btn-district{
-    width:100%;
+.btn-district {
+    width: 100%;
 }
 
+
+/*District page*/
+.problem {
+    cursor: pointer;
+    padding-right: 170px;
+}
+
+    .problem:hover, .my-problem:hover {
+        background-color: #f5f5f5;
+    }
+
+.problem-btn {
+    float: right;
+    margin-right: -160px;
+}
+
+.my-problem {
+    cursor: move;
+    padding-right: 110px;
+}
+
+.my-problem-btn {
+    float: right;
+    margin-right: -100px;
+}
+
+.my-problems-box {
+    border: 3px dashed gray;
+    width: 100%;
+    min-height: 75px;
+    text-align: center;
+    padding: 5px;
+}
+
+.my-problems-list {
+    text-align: left;
+    margin-bottom: 0px;
+}
 
 
 /*message*/
@@ -73,6 +111,6 @@
     }
 }
 
-tr:hover{
-    background-color:#bababa;
+tr:hover {
+    background-color: #bababa;
 }
