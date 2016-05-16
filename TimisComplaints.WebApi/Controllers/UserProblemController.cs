@@ -5,11 +5,12 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
+using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
 namespace TimisComplaints.WebApi.Controllers
 {
-    public class UserProblemController : ApiController
+    public class UserProblemController : IdentityInjectedController
     {
         [HttpPost]
         [ActionName("Create")]
