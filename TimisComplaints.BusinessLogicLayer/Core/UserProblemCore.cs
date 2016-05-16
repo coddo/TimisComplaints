@@ -14,13 +14,21 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await userProblemRepository.CreateAsync(userProblem);
             }
-        }
+        } 
 
         public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId)
         {
             using (var userProblemRepository = new UserProblemRepository())
             {
                 return await userProblemRepository.GetUserProblemsAsync(userId);
+            }
+        }
+
+        public static async Task<bool> UpdateOrderAsync(IList<UserProblem> userProblems)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.UpdateOrderAsync(userProblems);
             }
         }
     }
