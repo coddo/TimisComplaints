@@ -22,12 +22,13 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var userProblem = new UserProblem()
+                var userProblem = new UserProblem
                 {
                     UserId = model.UserId,
                     ProblemId = model.ProblemId,
                     DistrictId = model.DistrictId,
-                    Date = DateTime.Now
+                    Date = DateTime.Now,
+                    Order = model.Order
                 };
 
                 var result = await UserProblemCore.CreateAsync(userProblem);
