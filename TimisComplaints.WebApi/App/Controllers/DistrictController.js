@@ -3,6 +3,7 @@
     .controller('DistrictController', function (AuthService, $routeParams, $scope, API, HelperService, $timeout) {
 
         $scope.districtId = $routeParams.districtId;
+        $scope.districtName = $routeParams.districtName;
 
         $scope.selectedProblems = [];
 
@@ -31,7 +32,8 @@
                 //API.addSelectedProblem({ids}, function (succes) {
                 //}, function (error) {
                 //});
-                $scope.problemsChanged();
+                
+                //API.addProblem({})
 
                 //if ($scope.selectedProblems.length > 1) {
                 //    var scrollHeight = $($event.target).parent().innerHeight();
