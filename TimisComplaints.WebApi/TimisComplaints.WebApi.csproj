@@ -225,6 +225,7 @@
     </Compile>
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="Models\LetterModel.cs" />
     <Compile Include="Models\ProblemModel.cs" />
     <Compile Include="Models\UserProblemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
