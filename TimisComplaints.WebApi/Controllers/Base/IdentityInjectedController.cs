@@ -21,13 +21,13 @@ namespace TimisComplaints.WebApi.Controllers.Base
                     SessionKey = Encryptor.Md5Hash(new Guid().ToString())
                 };
 
-                Task.Run(async () => Identity = await UserCore.CreateAsync(user));
+                Identity = Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false).GetAwaiter().GetResult();
 
                 IdentityInjector.SetCookie(user.SessionKey, DateTime.Now.AddYears(10));
             }
             else
             {
-                Task.Run(async () => Identity = await UserCore.GetAsync(cookie));
+                Identity = Task.Run(() => UserCore.GetAsync(cookie)).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             if (Identity == null)
