@@ -45,6 +45,26 @@ namespace TimisComplaints.WebApi.Controllers
         }
 
         [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IHttpActionResult> DeleteAsync(Guid id)
+        {
+            try
+            {
+                var result = await UserProblemCore.DeleteAsync(id);
+                if (!result)
+                {
+                    return BadRequest("Error deleting user problem");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
         [ActionName("UpdateOrder")]
         public async Task<IHttpActionResult> UpdateOrder([FromBody] IList<UserProblemModel> model)
         {
