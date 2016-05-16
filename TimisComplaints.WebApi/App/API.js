@@ -30,6 +30,11 @@
                 isArray: true
             },
 
+            getMe:{
+                url: baseUrl + 'account/whoAmI',
+                method: 'GET',
+                isArray: false
+            },
 
             getAllDistricts: {
                 url: baseUrl + 'district/GetAll',
@@ -39,14 +44,34 @@
             getAllProblems: {
                 url: baseUrl + 'problem/GetAll',
                 method: 'GET',
+                //params: { districtId: '@districtId' },
                 isArray: true
             },
 
+            //User problems
+            getUserProblems:{
+                url: baseUrl + 'userProblem/GetAll',///:districtId',
+                method: 'GET',
+                //params: { districtId: '@districtId' },
+                isArray: true
+            },
             addProblem: {
                 url: baseUrl + 'userProblem/create',
                 method: 'POST',
                 isArray: false
             },
+            removeProblem: {
+                url: baseUrl + 'userProblem/delete',///:id',
+                method: 'DELETE',
+                //params: { id: '@id' },
+                isArray: false
+            },
+            updateOrder: {
+                url: baseUrl + 'userProblem/updateOrder',
+                method: 'POST',
+                isArray: true
+            },
+
             //addSelectedProblem: {
             //    url: baseUrl + 'problem/:ids',
             //    method: 'POST',
