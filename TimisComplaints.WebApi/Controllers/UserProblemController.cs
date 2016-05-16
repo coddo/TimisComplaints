@@ -99,17 +99,17 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid userId)
+        public async Task<IHttpActionResult> GetAllAsync()
         {
             try
             {
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(userId);
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id);
                 if (userProblems == null)
                 {
                     return BadRequest("No problems found");
                 }
 
-                IList<UserProblemModel> result = userProblems.Select(userProblem => new UserProblemModel()
+                var resultModel = userProblems.Select(userProblem => new UserProblemModel
                 {
                     Id = userProblem.Id,
                     UserId = userProblem.UserId,
@@ -120,7 +120,7 @@ namespace TimisComplaints.WebApi.Controllers
                     Order = userProblem.Order
                 }).ToList();
 
-                return Ok(result);
+                return Ok(resultModel);
             }
             catch (Exception ex)
             {

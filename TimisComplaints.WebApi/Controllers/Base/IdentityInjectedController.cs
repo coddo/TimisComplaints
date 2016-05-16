@@ -29,6 +29,11 @@ namespace TimisComplaints.WebApi.Controllers.Base
             {
                 Task.Run(async () => Identity = await UserCore.GetAsync(cookie));
             }
+
+            if (Identity == null)
+            {
+                Identity = new User();
+            }
         }
 
         protected User Identity { get; private set; }
