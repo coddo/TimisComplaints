@@ -42,7 +42,7 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        }
+        } 
 
         [HttpPost]
         [ActionName("UpdateOrder")]
@@ -68,6 +68,33 @@ namespace TimisComplaints.WebApi.Controllers
                 }
 
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetAll")]
+        public async Task<IHttpActionResult> GetUserProblemsAsync(Guid userId)
+        {
+            try
+            {
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(userId);
+                if (userProblems == null)
+                {
+                    return BadRequest("No problems found");
+                }
+
+                IList<ProblemModel> result = userProblems.Select(userProblem => new ProblemModel()
+                {
+                    Id = userProblem.Problem.Id,
+                    Name = userProblem.Problem.Name,
+                    Description = userProblem.Problem.Description
+                }).ToList();
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

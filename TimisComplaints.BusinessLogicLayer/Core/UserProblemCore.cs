@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using TimisComplaints.DataLayer;
 using TimisComplaints.DataLayer.Repositories;
@@ -12,6 +13,14 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             using (var userProblemRepository = new UserProblemRepository())
             {
                 return await userProblemRepository.CreateAsync(userProblem);
+            }
+        } 
+
+        public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.GetUserProblemsAsync(userId);
             }
         }
 
