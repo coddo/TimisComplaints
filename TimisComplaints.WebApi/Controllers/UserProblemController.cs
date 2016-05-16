@@ -99,14 +99,14 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetAll(Guid districtId)
         {
             try
             {
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id);
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, districtId);
                 if (userProblems == null)
                 {
-                    return BadRequest("No problems found");
+                    return BadRequest("Invalid input");
                 }
 
                 var resultModel = userProblems.Select(userProblem => new UserProblemModel

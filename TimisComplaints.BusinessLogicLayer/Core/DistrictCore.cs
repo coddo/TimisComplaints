@@ -12,7 +12,10 @@ namespace TimisComplaints.BusinessLogicLayer.Core
         {
             using (var districtRepository = new DistrictRepository())
             {
-                return await districtRepository.GetAsync(id);
+                return await districtRepository.GetAsync(id, new[]
+                {
+                    nameof(District.Problems)
+                });
             }
         }
 
