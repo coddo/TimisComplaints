@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
@@ -40,6 +42,37 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 return InternalServerError(ex);
             }
-        } 
+        }
+
+        [HttpPost]
+        [ActionName("UpdateOrder")]
+        public async Task<IHttpActionResult> UpdateOrder([FromBody]IList<UserProblemModel> model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                IList<UserProblem> userProblems = model.Select(m => new UserProblem()
+                {
+                    Id = m.Id,
+                    Order = m.Order
+                }).ToList();
+
+                var result = await UserProblemCore.UpdateOrderAsync(userProblems);
+                if (!result)
+                {
+                    return BadRequest("Error updating the user problems order");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using TimisComplaints.DataLayer;
 using TimisComplaints.DataLayer.Repositories;
 
@@ -12,6 +13,14 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await userProblemRepository.CreateAsync(userProblem);
             }
-        } 
+        }
+
+        public static async Task<bool> UpdateOrderAsync(IList<UserProblem> userProblems)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.UpdateOrderAsync(userProblems);
+            }
+        }
     }
 }
