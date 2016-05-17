@@ -1,0 +1,28 @@
+﻿<div class="container">
+    <div class="col-md-5">
+        <h2>Scrisori existente</h2>
+        <br/>
+        <div class="list-group">
+            <div ng-repeat="ltr in letters" class="list-group-item">
+                <h4 class="list-group-item-heading"><b style="font-size: 22px">{{::ltr.title}}</b></h4>
+                <p class="list-group-item-text">{{::ltr.message}} </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-5 col-md-offset-1">
+        <h2>Posteaza o scrisoare</h2>
+        <br/>
+        <form ng-submit="createLetter($event)">
+            <div class="form-group">
+                <label for="title">Titlu</label>
+                <input id="title" type="text" class="form-control" ng-model="letter.title">
+            </div>
+            <div class="form-group">
+                <label for="msg">Mesaj</label>
+                <textarea id="msg" rows="10" class="form-control" ng-model="letter.message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Posteaza</button>
+        </form>
+    </div>
+</div>

@@ -13,7 +13,10 @@
                 templateUrl: '/Views/District.html',
                 controller: 'DistrictController'
             })
-
+            .when('/scrisoare', {
+                templateUrl: '/Views/Letter.html',
+                controller: 'LetterController'
+            })
             .otherwise({
                 templateUrl: '/Views/Inexistent.html',
             });

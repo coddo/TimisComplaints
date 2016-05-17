@@ -34,5 +34,15 @@ namespace TimisComplaints.DataLayer.Repositories
 
             return userProblems.ToList();
         }
+
+        public async Task<IList<UserProblem>> GetForDistrictProblemAsync(Guid problemId, Guid districtId)
+        {
+            var userProblems = await FetchListAsync(p => p.ProblemId == problemId && p.DistrictId == districtId, new[]
+            {
+                nameof(UserProblem.Problem)
+            });
+
+            return userProblems.ToList();
+        }
     }
 }

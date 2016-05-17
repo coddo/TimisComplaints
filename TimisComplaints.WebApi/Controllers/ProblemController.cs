@@ -7,11 +7,17 @@ using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
 using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
+using WebGrease.Css.Extensions;
 
 namespace TimisComplaints.WebApi.Controllers
 {
     public class ProblemController : IdentityInjectedController
     {
+        public ProblemController()
+        {
+            
+        }
+
         [HttpGet]
         [ActionName("Get")]
         public async Task<IHttpActionResult> Get(Guid id)
@@ -51,7 +57,7 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("Invalid districtId");
                 }
 
-                var problems = SortAndComputePoints(district.Problems);
+                var problems = await SortAndComputePoints(district);
 
                 return Ok(problems);
             }
@@ -148,15 +154,22 @@ namespace TimisComplaints.WebApi.Controllers
 
         #region Private methods
 
-        private static IList<ProblemModel> SortAndComputePoints(ICollection<Problem> problems)
+        private static async Task<IList<ProblemModel>> SortAndComputePoints(District district)
         {
-            var modelCollection = problems.Select(problem => new ProblemModel
+            var modelCollection = new List<ProblemModel>();
+
+            foreach (var problem in district.Problems)
             {
-                Id = problem.Id,
-                Name = problem.Name,
-                Description = problem.Description,
-                Points = problem.UserProblems.Sum(userProblem => problems.Count - userProblem.Order)
-            }).OrderByDescending(model => model.Points).ToList();
+                var userProblems = await UserProblemCore.GetForDistrictProblemAsync(problem.Id, district.Id);
+
+                modelCollection.Add(new ProblemModel
+                {
+                    Id = problem.Id,
+                    Name = problem.Name,
+                    Description = problem.Description,
+                    Points = userProblems.Sum(userProblem => district.Problems.Count - userProblem.Order)
+                });
+            }
 
             return modelCollection;
         }

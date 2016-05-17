@@ -29,6 +29,19 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             }
         }
 
+        public static async Task<IList<UserProblem>> GetForDistrictProblemAsync(Guid problemId, Guid districtId)
+        {
+            if (problemId == Guid.Empty || districtId == Guid.Empty)
+            {
+                return null;
+            }
+
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.GetForDistrictProblemAsync(problemId, districtId);
+            }
+        }
+
         public static async Task<bool> UpdateOrderAsync(IList<UserProblem> userProblems)
         {
             using (var userProblemRepository = new UserProblemRepository())
