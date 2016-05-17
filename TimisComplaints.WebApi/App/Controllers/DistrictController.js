@@ -51,7 +51,7 @@
                 API.addProblem({
                     problemId: problem.id,
                     districtId: $scope.districtId,
-                    order: problem.order
+                    order: $scope.selectedProblems.length
                 }, function (success) {
                     $scope.selectedProblems.push(success);
                     success.name = problem.name;
@@ -115,7 +115,6 @@
             }, function (error) {
                 HelperService.StopLoading('updateOrder');
             });
-            //TODO: Upload order
         }
 
 
