@@ -14,7 +14,8 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await districtRepository.GetAsync(id, new[]
                 {
-                    nameof(District.Problems)
+                    nameof(District.Problems),
+                    nameof(District.UserProblems)
                 });
             }
         }
