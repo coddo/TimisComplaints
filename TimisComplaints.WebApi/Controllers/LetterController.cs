@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
@@ -18,7 +20,13 @@ namespace TimisComplaints.WebApi.Controllers
             {
                 var letters = await LetterCore.GetAllAsync();
 
-                return Ok(letters);
+                IList<LetterModel> result = letters.Select(letter => new LetterModel
+                {
+                    Title = letter.Title,
+                    Message = letter.Message
+                }).ToList();
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

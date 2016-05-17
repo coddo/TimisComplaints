@@ -20,6 +20,8 @@
             HelperService.StartLoading('createLetter');
             API.createLetter($scope.letter, function (success) {
                 $scope.letters.push(success);
+                $scope.letter.title = '';
+                $scope.letter.message = '';
                 HelperService.StopLoading('createLetter');
             }, function (error) {
                 HelperService.StopLoading('createLetter');
