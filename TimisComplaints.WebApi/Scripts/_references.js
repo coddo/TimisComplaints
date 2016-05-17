@@ -4,6 +4,7 @@
 /// <reference path="../app/app.js" />
 /// <reference path="../app/controllers/districtcontroller.js" />
 /// <reference path="../app/controllers/indexcontroller.js" />
+/// <reference path="../app/controllers/lettercontroller.js" />
 /// <reference path="../app/services/authservice.js" />
 /// <reference path="../app/services/helperservice.js" />
 /// <reference path="ai.0.15.0-build58334.min.js" />

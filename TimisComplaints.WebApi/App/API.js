@@ -39,13 +39,28 @@
                 method: 'GET',
                 isArray: true
             },
+            getAllLetters: {
+                url: baseUrl + 'letter/GetAll',
+                method: 'GET',
+                isArray: true
+            },
+            createLetter: {
+                url: baseUrl + 'letter/Create',
+                method: 'POST',
+                isArray: false
+            },
+            removeLetter: {
+                url: baseUrl + 'letter/Delete',
+                method: 'DELETE',
+                isArray: false
+            },
             //addSelectedProblem: {
             //    url: baseUrl + 'problem/:ids',
             //    method: 'POST',
             //    prams: {ids:'@ids'},
             //    isArray:false
             //},
-            
+
 
 
         });
