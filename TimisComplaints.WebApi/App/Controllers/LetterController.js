@@ -4,8 +4,18 @@
         $scope.letters = [];
         $scope.letter = {
             title: '',
-            message: ''
+            message: '',
+            email: ''
         };
+
+        HelperService.StartLoading('getMe');
+        API.getMe({}, function (success) {
+            $scope.letter.email = success.email;
+            HelperService.StopLoading('getMe');
+        }, function (error) {
+            HelperService.StopLoading('getMe');
+            HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
+        });
 
         HelperService.StartLoading('loadLetters');
         API.getAllLetters({}, function (success) {

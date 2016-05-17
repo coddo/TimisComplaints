@@ -23,7 +23,8 @@ namespace TimisComplaints.WebApi.Controllers
                 IList<LetterModel> result = letters.Select(letter => new LetterModel
                 {
                     Title = letter.Title,
-                    Message = letter.Message
+                    Message = letter.Message,
+                    Email = letter.User.Email
                 }).ToList();
 
                 return Ok(result);
