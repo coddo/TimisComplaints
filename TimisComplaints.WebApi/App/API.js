@@ -13,11 +13,6 @@
 
         var res = $resource('/', {}, {
             //Users
-            getMe: {
-                url: baseUrl + 'users/me',
-                method: 'GET',
-                isArray: false
-            },
             updateUserProblems: {
                 url: baseUrl + 'admin/sourceProviders',
                 method: 'POST',
