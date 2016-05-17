@@ -30,9 +30,10 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("No problem with the given id found");
                 }
 
-                var result = new ProblemModel()
+                var result = new ProblemModel
                 {
                     Id = problem.Id,
+                    UserId = problem.UserId,
                     Name = problem.Name,
                     Description = problem.Description
                 };
@@ -165,6 +166,7 @@ namespace TimisComplaints.WebApi.Controllers
                 modelCollection.Add(new ProblemModel
                 {
                     Id = problem.Id,
+                    UserId = problem.UserId,
                     Name = problem.Name,
                     Description = problem.Description,
                     Points = userProblems.Sum(userProblem => district.Problems.Count - userProblem.Order)

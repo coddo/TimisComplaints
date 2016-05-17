@@ -19,7 +19,7 @@ namespace TimisComplaints.WebApi.Controllers
 
                 for (var i = 1; i < 10; i++)
                 {
-                    myList.Add(new ProblemModel()
+                    myList.Add(new ProblemModel
                     {
                         Id = Guid.NewGuid(),
                         Name = userName + " prb " + i.ToString()
