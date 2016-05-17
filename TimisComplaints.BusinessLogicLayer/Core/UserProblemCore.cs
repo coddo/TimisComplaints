@@ -16,11 +16,16 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             }
         }
 
-        public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId)
+        public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId, Guid districtId)
         {
+            if (userId == Guid.Empty || districtId == Guid.Empty)
+            {
+                return null;
+            }
+
             using (var userProblemRepository = new UserProblemRepository())
             {
-                return await userProblemRepository.GetUserProblemsAsync(userId);
+                return await userProblemRepository.GetUserProblemsAsync(userId, districtId);
             }
         }
 

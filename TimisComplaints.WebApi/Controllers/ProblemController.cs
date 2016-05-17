@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
@@ -41,17 +42,18 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetAll(Guid districtId)
         {
             try
             {
-                var problems = await ProblemCore.GetAllAsync();
-                if (problems == null)
+                var district = await DistrictCore.GetAsync(districtId);
+                if (district == null)
                 {
-                    return BadRequest("No problems found");
+                    return BadRequest("Invalid districtId");
                 }
 
-                IList<ProblemModel> result = problems.Select(problem => new ProblemModel()
+                var problems = district.Problems;
+                var result = problems.Select(problem => new ProblemModel
                 {
                     Id = problem.Id,
                     Name = problem.Name,

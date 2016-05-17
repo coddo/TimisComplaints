@@ -9,7 +9,7 @@
                 templateUrl: '/Views/Index.html',
                 controller: 'IndexController'
             })
-            .when('/cartier/:districtId', {
+            .when('/cartier/:districtId/:districtName', {
                 templateUrl: '/Views/District.html',
                 controller: 'DistrictController'
             })

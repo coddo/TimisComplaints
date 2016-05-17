@@ -25,7 +25,7 @@ namespace TimisComplaints.WebApi.Controllers
 
                 var userProblem = new UserProblem
                 {
-                    UserId = model.UserId,
+                    UserId = Identity.Id,
                     ProblemId = model.ProblemId,
                     DistrictId = model.DistrictId,
                     Date = DateTime.Now,
@@ -38,7 +38,7 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("Error adding the problem to the user");
                 }
 
-                return Ok();
+                return Ok(userProblem);
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace TimisComplaints.WebApi.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [ActionName("Delete")]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
@@ -99,14 +99,14 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAll")]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetAll(Guid districtId)
         {
             try
             {
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id);
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, districtId);
                 if (userProblems == null)
                 {
-                    return BadRequest("No problems found");
+                    return BadRequest("Invalid input");
                 }
 
                 var resultModel = userProblems.Select(userProblem => new UserProblemModel
@@ -118,7 +118,7 @@ namespace TimisComplaints.WebApi.Controllers
                     Name = userProblem.Problem.Name,
                     Description = userProblem.Problem.Description,
                     Order = userProblem.Order
-                }).ToList();
+                }).OrderBy(p => p.Order).ToList();
 
                 return Ok(resultModel);
             }
