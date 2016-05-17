@@ -29,6 +29,7 @@
         $scope.createLetter = function ($event) {
             HelperService.StartLoading('createLetter');
             API.createLetter($scope.letter, function (success) {
+                success.email = $scope.letter.email;
                 $scope.letters.push(success);
                 $scope.letter.title = '';
                 $scope.letter.message = '';

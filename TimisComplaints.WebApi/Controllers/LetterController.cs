@@ -60,6 +60,19 @@ namespace TimisComplaints.WebApi.Controllers
                     return InternalServerError();
                 }
 
+                var user = await UserCore.GetAsync(Identity.Id);
+                if (user.Email == model.Email)
+                {
+                    return Ok(letter);
+                }
+
+                user.Email = model.Email;
+                var updatedUser = await UserCore.UpdateAsync(user);
+                if (updatedUser == null)
+                {
+                    return InternalServerError();
+                }
+
                 return Ok(letter);
             }
             catch (Exception ex)
