@@ -35,6 +35,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
@@ -96,6 +97,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Problems_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Problems" Type="Self.Problems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Problems">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserProblems_Districts">
           <End Role="Districts" Type="Self.Districts" Multiplicity="1" />
           <End Role="UserProblems" Type="Self.UserProblems" Multiplicity="*" />
@@ -151,6 +164,10 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="Letters" EntitySet="Letters" />
           </AssociationSet>
+          <AssociationSet Name="FK_Problems_Users" Association="Self.FK_Problems_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Problems" EntitySet="Problems" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserProblems_Districts" Association="Self.FK_UserProblems_Districts">
             <End Role="Districts" EntitySet="Districts" />
             <End Role="UserProblems" EntitySet="UserProblems" />
@@ -171,19 +188,10 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Districts" EntityType="TimisComplaintsModel.District" />
           <EntitySet Name="Letters" EntityType="TimisComplaintsModel.Letter" />
-          <EntitySet Name="Problems" EntityType="TimisComplaintsModel.Problem" />
           <EntitySet Name="UserProblems" EntityType="TimisComplaintsModel.UserProblem" />
           <AssociationSet Name="FK_UserProblems_Districts" Association="TimisComplaintsModel.FK_UserProblems_Districts">
             <End Role="District" EntitySet="Districts" />
             <End Role="UserProblem" EntitySet="UserProblems" />
-          </AssociationSet>
-          <AssociationSet Name="FK_UserProblems_Problems" Association="TimisComplaintsModel.FK_UserProblems_Problems">
-            <End Role="Problem" EntitySet="Problems" />
-            <End Role="UserProblem" EntitySet="UserProblems" />
-          </AssociationSet>
-          <AssociationSet Name="DistrictProblemAssignments" Association="TimisComplaintsModel.DistrictProblemAssignments">
-            <End Role="District" EntitySet="Districts" />
-            <End Role="Problem" EntitySet="Problems" />
           </AssociationSet>
           <EntitySet Name="Users" EntityType="TimisComplaintsModel.User" />
           <AssociationSet Name="FK_Letters_Users" Association="TimisComplaintsModel.FK_Letters_Users">
@@ -193,6 +201,19 @@
           <AssociationSet Name="FK_UserProblems_Users" Association="TimisComplaintsModel.FK_UserProblems_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="UserProblem" EntitySet="UserProblems" />
+          </AssociationSet>
+          <EntitySet Name="Problems" EntityType="TimisComplaintsModel.Problem" />
+          <AssociationSet Name="FK_Problems_Users" Association="TimisComplaintsModel.FK_Problems_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Problem" EntitySet="Problems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProblems_Problems" Association="TimisComplaintsModel.FK_UserProblems_Problems">
+            <End Role="Problem" EntitySet="Problems" />
+            <End Role="UserProblem" EntitySet="UserProblems" />
+          </AssociationSet>
+          <AssociationSet Name="DistrictProblemAssignments" Association="TimisComplaintsModel.DistrictProblemAssignments">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="Problem" EntitySet="Problems" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="District">
@@ -215,16 +236,6 @@
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="Letter" ToRole="User" />
         </EntityType>
-        <EntityType Name="Problem">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="Problem" ToRole="UserProblem" />
-          <NavigationProperty Name="Districts" Relationship="TimisComplaintsModel.DistrictProblemAssignments" FromRole="Problem" ToRole="District" />
-        </EntityType>
         <EntityType Name="UserProblem">
           <Key>
             <PropertyRef Name="Id" />
@@ -236,8 +247,8 @@
           <Property Name="Order" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="District" Relationship="TimisComplaintsModel.FK_UserProblems_Districts" FromRole="UserProblem" ToRole="District" />
-          <NavigationProperty Name="Problem" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="UserProblem" ToRole="Problem" />
           <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="UserProblem" ToRole="User" />
+          <NavigationProperty Name="Problem" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="UserProblem" ToRole="Problem" />
         </EntityType>
         <Association Name="FK_UserProblems_Districts">
           <End Type="TimisComplaintsModel.District" Role="District" Multiplicity="1" />
@@ -251,22 +262,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UserProblems_Problems">
-          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="1" />
-          <End Type="TimisComplaintsModel.UserProblem" Role="UserProblem" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Problem">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="UserProblem">
-              <PropertyRef Name="ProblemId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="DistrictProblemAssignments">
-          <End Type="TimisComplaintsModel.District" Role="District" Multiplicity="*" />
-          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="*" />
-        </Association>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -279,6 +274,7 @@
           <Property Name="SessionKey" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Letters" Relationship="TimisComplaintsModel.FK_Letters_Users" FromRole="User" ToRole="Letter" />
           <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Users" FromRole="User" ToRole="UserProblem" />
+          <NavigationProperty Name="Problems" Relationship="TimisComplaintsModel.FK_Problems_Users" FromRole="User" ToRole="Problem" />
         </EntityType>
         <Association Name="FK_Letters_Users">
           <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
@@ -303,6 +299,46 @@
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Problem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="TimisComplaintsModel.FK_Problems_Users" FromRole="Problem" ToRole="User" />
+          <NavigationProperty Name="UserProblems" Relationship="TimisComplaintsModel.FK_UserProblems_Problems" FromRole="Problem" ToRole="UserProblem" />
+          <NavigationProperty Name="Districts" Relationship="TimisComplaintsModel.DistrictProblemAssignments" FromRole="Problem" ToRole="District" />
+        </EntityType>
+        <Association Name="FK_Problems_Users">
+          <End Type="TimisComplaintsModel.User" Role="User" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Problem">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProblems_Problems">
+          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="1" />
+          <End Type="TimisComplaintsModel.UserProblem" Role="UserProblem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Problem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserProblem">
+              <PropertyRef Name="ProblemId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DistrictProblemAssignments">
+          <End Type="TimisComplaintsModel.District" Role="District" Multiplicity="*" />
+          <End Type="TimisComplaintsModel.Problem" Role="Problem" Multiplicity="*" />
         </Association>
         </Schema>
     </edmx:ConceptualModels>
@@ -329,15 +365,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Problems">
-            <EntityTypeMapping TypeName="TimisComplaintsModel.Problem">
-              <MappingFragment StoreEntitySet="Problems">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserProblems">
             <EntityTypeMapping TypeName="TimisComplaintsModel.UserProblem">
               <MappingFragment StoreEntitySet="UserProblems">
@@ -345,6 +372,28 @@
                 <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
                 <ScalarProperty Name="ProblemId" ColumnName="ProblemId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TimisComplaintsModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="SessionKey" ColumnName="SessionKey" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Problems">
+            <EntityTypeMapping TypeName="TimisComplaintsModel.Problem">
+              <MappingFragment StoreEntitySet="Problems">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -358,18 +407,6 @@
               <ScalarProperty Name="Id" ColumnName="DistrictId" />
             </EndProperty>
           </AssociationSetMapping>
-          <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TimisComplaintsModel.User">
-              <MappingFragment StoreEntitySet="Users">
-                <ScalarProperty Name="SessionKey" ColumnName="SessionKey" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

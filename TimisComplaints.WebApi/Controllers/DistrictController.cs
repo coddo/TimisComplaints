@@ -52,6 +52,7 @@ namespace TimisComplaints.WebApi.Controllers
                 IList<ProblemModel> result = problems.Select(problem => new ProblemModel()
                 {
                     Id = problem.Id,
+                    UserId = problem.UserId,
                     Name = problem.Name,
                     Description = problem.Description
                 }).ToList();
