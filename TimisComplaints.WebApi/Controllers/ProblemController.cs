@@ -15,7 +15,6 @@ namespace TimisComplaints.WebApi.Controllers
     {
         public ProblemController()
         {
-            
         }
 
         [HttpGet]
@@ -30,9 +29,10 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("No problem with the given id found");
                 }
 
-                var result = new ProblemModel()
+                var result = new ProblemModel
                 {
                     Id = problem.Id,
+                    UserId = problem.UserId,
                     Name = problem.Name,
                     Description = problem.Description
                 };
@@ -52,6 +52,7 @@ namespace TimisComplaints.WebApi.Controllers
             try
             {
                 var district = await DistrictCore.GetAsync(districtId);
+
                 if (district == null)
                 {
                     return BadRequest("Invalid districtId");
@@ -60,6 +61,62 @@ namespace TimisComplaints.WebApi.Controllers
                 var problems = await SortAndComputePoints(district);
 
                 return Ok(problems);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetAllUnacceptedForUser")]
+        public async Task<IHttpActionResult> GetAllUnacceptedForUser(Guid userId)
+        {
+            try
+            {
+                var problems = await ProblemCore.GetAllUnaccepted(userId);
+                if (problems == null)
+                {
+                    return BadRequest("Invalid Id or no problems found");
+                }
+
+                var model = problems.Select(p => new ProblemModel
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    Name = p.Name,
+                    Description = p.Description
+                }).ToArray();
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetAllUnaccepted")]
+        public async Task<IHttpActionResult> GetAllUnaccepted()
+        {
+            try
+            {
+                var problems = await ProblemCore.GetAllUnaccepted();
+                if (problems == null)
+                {
+                    return BadRequest("Invalid Id or no problems found");
+                }
+
+                var model = problems.Select(p => new ProblemModel
+                {
+                    Id = p.Id,
+                    UserId = p.UserId,
+                    Name = p.Name,
+                    Description = p.Description
+                }).ToArray();
+
+                return Ok(model);
             }
             catch (Exception ex)
             {
@@ -158,13 +215,14 @@ namespace TimisComplaints.WebApi.Controllers
         {
             var modelCollection = new List<ProblemModel>();
 
-            foreach (var problem in district.Problems)
+            foreach (var problem in district.Problems.Where(p => p.UserId == Guid.Empty))
             {
                 var userProblems = await UserProblemCore.GetForDistrictProblemAsync(problem.Id, district.Id);
 
                 modelCollection.Add(new ProblemModel
                 {
                     Id = problem.Id,
+                    UserId = problem.UserId,
                     Name = problem.Name,
                     Description = problem.Description,
                     Points = userProblems.Sum(userProblem => district.Problems.Count - userProblem.Order)
