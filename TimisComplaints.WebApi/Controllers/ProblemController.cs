@@ -53,6 +53,7 @@ namespace TimisComplaints.WebApi.Controllers
             try
             {
                 var district = await DistrictCore.GetAsync(districtId);
+
                 if (district == null)
                 {
                     return BadRequest("Invalid districtId");
@@ -159,7 +160,7 @@ namespace TimisComplaints.WebApi.Controllers
         {
             var modelCollection = new List<ProblemModel>();
 
-            foreach (var problem in district.Problems)
+            foreach (var problem in district.Problems.Where(p => p.UserId == Guid.Empty))
             {
                 var userProblems = await UserProblemCore.GetForDistrictProblemAsync(problem.Id, district.Id);
 
