@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
@@ -52,15 +51,9 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest("Invalid districtId");
                 }
 
-                var problems = district.Problems;
-                var result = problems.Select(problem => new ProblemModel
-                {
-                    Id = problem.Id,
-                    Name = problem.Name,
-                    Description = problem.Description
-                }).ToList();
+                var problems = SortAndComputePoints(district.Problems);
 
-                return Ok(result);
+                return Ok(problems);
             }
             catch (Exception ex)
             {
@@ -152,5 +145,22 @@ namespace TimisComplaints.WebApi.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        #region Private methods
+
+        private static IList<ProblemModel> SortAndComputePoints(ICollection<Problem> problems)
+        {
+            var modelCollection = problems.Select(problem => new ProblemModel
+            {
+                Id = problem.Id,
+                Name = problem.Name,
+                Description = problem.Description,
+                Points = problem.UserProblems.Sum(userProblem => problems.Count - userProblem.Order)
+            }).OrderByDescending(model => model.Points).ToList();
+
+            return modelCollection;
+        }
+
+        #endregion
     }
 }

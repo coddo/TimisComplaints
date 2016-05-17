@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System;
+using System.Web.Http;
 using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
@@ -10,22 +11,29 @@ namespace TimisComplaints.WebApi.Controllers
         [ActionName("WhoAmI")]
         public IHttpActionResult WhoAmI()
         {
-            if (Identity == null)
+            try
             {
-                return Unauthorized();
+                if (Identity == null)
+                {
+                    return Unauthorized();
+                }
+
+                var user = new IdentityModel
+                {
+                    Id = Identity.Id,
+                    SessionKey = Identity.SessionKey,
+                    Email = Identity.Email,
+                    FirstName = Identity.FirstName,
+                    LastName = Identity.LastName,
+                    Password = Identity.Password
+                };
+
+                return Ok(user);
             }
-
-            var user = new IdentityModel
+            catch (Exception ex)
             {
-                Id = Identity.Id,
-                SessionKey = Identity.SessionKey,
-                Email = Identity.Email,
-                FirstName = Identity.FirstName,
-                LastName = Identity.LastName,
-                Password = Identity.Password
-            };
-
-            return Ok(user);
+                return InternalServerError(ex);
+            }
         }
     }
 }

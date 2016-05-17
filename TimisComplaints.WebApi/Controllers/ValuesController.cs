@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
-using TimisComplaints.WebApi.Controllers.Base;
 
 namespace TimisComplaints.WebApi.Controllers
 {
-    [Authorize]
-    public class ValuesController : IdentityInjectedController
+    public class ValuesController : ApiController
     {
         // GET api/values
         public IEnumerable<string> Get()
