@@ -213,6 +213,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Base\IdentityInjectedController.cs" />
     <Compile Include="Controllers\DistrictController.cs" />
+    <Compile Include="Controllers\LetterController.cs" />
     <Compile Include="Controllers\ProblemController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserProblemController.cs" />
@@ -224,6 +225,7 @@
     </Compile>
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
+    <Compile Include="Models\LetterModel.cs" />
     <Compile Include="Models\ProblemModel.cs" />
     <Compile Include="Models\UserProblemModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

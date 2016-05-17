@@ -75,4 +75,7 @@
   <ItemGroup>
     <RefactorLog Include="TimisComplaints.Database.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="dbo\Scripts\AddDistrictProblemAssignments.sql" />
+  </ItemGroup>
 </Project>

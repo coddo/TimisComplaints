@@ -2,7 +2,7 @@
 <div class="container">
 
 
-    <h2>Top probleme ale cartierului
+    <h2>Top probleme ale cartierului <b>{{districtName}}</b>
         <!--<span style="float:right;font-size:16px;">Reordonează după priorități!</span>-->
     </h2>
     <h4>Reordonează după priorități!</h4>
@@ -28,7 +28,8 @@
     <div class="list-group">
         <div ng-repeat="prb in problems | orderBy:'-id'" class="list-group-item problem" ng-hide="prb.selected">
             <button ng-hide="prb.selected" ng-click="selectProblem(prb, $event)" class="btn btn-primary problem-btn">Adaugă problema!</button>
-            <button ng-show="prb.selected" ng-click="removeProblem(prb, $event)" class="btn btn-danger problem-btn">Șterge problema!</button>
+            <!--Not applicable anymore-->
+            <!--<button ng-show="prb.selected" ng-click="removeProblem(prb, $event)" class="btn btn-danger problem-btn">Șterge problema!</button>-->
 
             <h4 class="list-group-item-heading">{{::prb.name}}</h4>
             <p class="list-group-item-text">{{::prb.description}} </p>
