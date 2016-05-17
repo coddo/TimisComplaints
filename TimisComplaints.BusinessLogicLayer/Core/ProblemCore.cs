@@ -24,6 +24,22 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             }
         }
 
+        public static async Task<IList<Problem>> GetAllUnaccepted(Guid userId)
+        {
+            using (var problemRepository = new ProblemRepository())
+            {
+                return await problemRepository.GetAllUnaccepted(userId);
+            }
+        }
+
+        public static async Task<IList<Problem>> GetAllUnaccepted()
+        {
+            using (var problemRepository = new ProblemRepository())
+            {
+                return await problemRepository.GetAllUnaccepted();
+            }
+        }
+
         public static async Task<Problem> CreateAsync(Problem problem)
         {
             using (var problemRepository = new ProblemRepository())
