@@ -8,6 +8,17 @@
             email: ''
         };
 
+        var loadLetters = function () {
+            HelperService.StartLoading('loadLetters');
+            API.getAllLetters({}, function (success) {
+                $scope.letters = success;
+                HelperService.StopLoading('loadLetters');
+            }, function (error) {
+                HelperService.StopLoading('loadLetters');
+                HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
+            });
+        };
+
         HelperService.StartLoading('getMe');
         API.getMe({}, function (success) {
             $scope.letter.email = success.email;
@@ -17,20 +28,12 @@
             HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
         });
 
-        HelperService.StartLoading('loadLetters');
-        API.getAllLetters({}, function (success) {
-            $scope.letters = success;
-            HelperService.StopLoading('loadLetters');
-        }, function (error) {
-            HelperService.StopLoading('loadLetters');
-            HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
-        });
+        loadLetters();
 
         $scope.createLetter = function ($event) {
             HelperService.StartLoading('createLetter');
             API.createLetter($scope.letter, function (success) {
-                success.email = $scope.letter.email;
-                $scope.letters.push(success);
+                loadLetters();
                 $scope.letter.title = '';
                 $scope.letter.message = '';
                 HelperService.StopLoading('createLetter');
