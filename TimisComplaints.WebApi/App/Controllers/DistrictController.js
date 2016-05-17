@@ -4,9 +4,12 @@
 
         $scope.districtId = $routeParams.districtId;
         $scope.districtName = $routeParams.districtName;
-        $scope.totalScore = 0;
+        //$scope.totalScore = 0;
+        $scope.maxPoints = 0;
 
         $scope.selectedProblems = [];
+        $scope.newProblem = { name: '', description: '' };
+        $scope.userAddedProblems = [];
 
 
         HelperService.StartLoading('loadProblems');
@@ -14,8 +17,12 @@
             $scope.problems = success;
             HelperService.StopLoading('loadProblems');
 
+            $scope.totalScore = 0;
             success.forEach(function (prb) {
-                $scope.totalScore = prb.points;
+                if (prb.points > $scope.maxPoints)
+                    $scope.maxPoints = prb.points;
+
+                //$scope.totalScore += prb.points;
             });
 
             //Load user's problem
@@ -118,6 +125,18 @@
             });
         }
 
+        $scope.sendNewProblem = function () {
+            HelperService.StartLoading('sendNewProblem');
+            API.createProblem($scope.newProblem, function (success) {
+                $scope.userAddedProblems.push($scope.newProblem);
+
+                $scope.newProblem = { name: '', description: '' };
+
+                HelperService.StopLoading('sendNewProblem');
+            }, function (error) {
+                HelperService.StopLoading('sendNewProblem');
+            });
+        }
 
         $scope.sortableOptions = {
             stop: function (e, ui) {

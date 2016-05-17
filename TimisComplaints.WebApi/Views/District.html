@@ -35,11 +35,38 @@
             <h4 class="list-group-item-heading">{{::prb.name}}</h4>
             <p class="list-group-item-text">{{::prb.description}} </p>
 
-            <uib-progressbar value="prb.points/totalScore*100" type="danger"></uib-progressbar>
-
+            <uib-progressbar value="prb.points*100/maxPoints" type="danger"></uib-progressbar>
         </div>
     </div>
 
+    <h3>Adaugă o problemă inexistentă</h3>
+    <h5 ng-show="userAddedProblems.length>0">Problemele următoare așteaptă verificare.</h5>
+    <div class="list-group">
+        <a href="#" ng-repeat="prb in userAddedProblems" class="list-group-item list-group-item-warning">
+            <h4 class="list-group-item-heading">{{::prb.name}}</h4>
+            <p class="list-group-item-text">{{::prb.description}} </p>
+        </a>
+    </div>
 
+    <div>
+        <form ng-submit="sendNewProblem()">
+            <table class="table">
+                <tr>
+                    <td style="width:150px;">Nume problemă</td>
+                    <td><input type="text" class="form-control" ng-model="newProblem.name" required /></td>
+                </tr>
+                <tr>
+                    <td style="width:150px;">Descriere problemă</td>
+                    <td><textarea class="form-control" ng-model="newProblem.description" required></textarea></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" class="btn btn-primary" value="Trimite problema!" />
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 </div>
