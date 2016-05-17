@@ -4,6 +4,7 @@
 
         $scope.districtId = $routeParams.districtId;
         $scope.districtName = $routeParams.districtName;
+        $scope.totalScore = 0;
 
         $scope.selectedProblems = [];
 
@@ -12,6 +13,10 @@
         API.getAllProblems({ districtId: $scope.districtId }, function (success) {
             $scope.problems = success;
             HelperService.StopLoading('loadProblems');
+
+            success.forEach(function (prb) {
+                $scope.totalScore = prb.points;
+            });
 
             //Load user's problem
             HelperService.StartLoading('getUserProblems');
@@ -26,10 +31,6 @@
                     }
                 });
 
-                //$scope.problems = $filter('filter')($scope.problems, { id: success }, function (actual, expected) {
-                //    var prb = $filter('filter')(expected, { problemId: actual }, true);
-                //    return (prb == null || prb.length == 0);
-                //});
 
                 HelperService.StopLoading('getUserProblems');
             }, function (error) {
