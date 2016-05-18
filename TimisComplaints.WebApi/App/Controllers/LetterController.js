@@ -8,7 +8,14 @@
             email: ''
         };
 
-        var loadLetters = function () {
+        function init() {
+            loadLetters();
+            auth();
+        }
+        init();
+
+
+        function loadLetters () {
             HelperService.StartLoading('loadLetters');
             API.getAllLetters({}, function (success) {
                 $scope.letters = success;
@@ -19,16 +26,12 @@
             });
         };
 
-        HelperService.StartLoading('getMe');
-        API.getMe({}, function (success) {
-            $scope.letter.email = success.email;
-            HelperService.StopLoading('getMe');
-        }, function (error) {
-            HelperService.StopLoading('getMe');
-            HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
-        });
+        function auth() {
+            AuthService.Authenticate(function (user) {
+                $scope.letter.email = user.email;
+            });
+        }
 
-        loadLetters();
 
         $scope.createLetter = function ($event) {
             HelperService.StartLoading('createLetter');
