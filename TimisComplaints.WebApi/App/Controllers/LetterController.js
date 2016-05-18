@@ -4,22 +4,36 @@
         $scope.letters = [];
         $scope.letter = {
             title: '',
-            message: ''
+            message: '',
+            email: ''
         };
 
-        HelperService.StartLoading('loadLetters');
-        API.getAllLetters({}, function (success) {
-            $scope.letters = success;
-            HelperService.StopLoading('loadLetters');
+        var loadLetters = function () {
+            HelperService.StartLoading('loadLetters');
+            API.getAllLetters({}, function (success) {
+                $scope.letters = success;
+                HelperService.StopLoading('loadLetters');
+            }, function (error) {
+                HelperService.StopLoading('loadLetters');
+                HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
+            });
+        };
+
+        HelperService.StartLoading('getMe');
+        API.getMe({}, function (success) {
+            $scope.letter.email = success.email;
+            HelperService.StopLoading('getMe');
         }, function (error) {
-            HelperService.StopLoading('loadLetters');
+            HelperService.StopLoading('getMe');
             HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
         });
+
+        loadLetters();
 
         $scope.createLetter = function ($event) {
             HelperService.StartLoading('createLetter');
             API.createLetter($scope.letter, function (success) {
-                $scope.letters.push(success);
+                loadLetters();
                 $scope.letter.title = '';
                 $scope.letter.message = '';
                 HelperService.StopLoading('createLetter');

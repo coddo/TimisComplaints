@@ -11,7 +11,10 @@ namespace TimisComplaints.BusinessLogicLayer.Core
         {
             using (var letterRepository = new LetterRepository())
             {
-                return await letterRepository.GetAllAsync();
+                return await letterRepository.GetAllAsync(new[]
+                {
+                    nameof(Letter.User)
+                });
             }
         }
 

@@ -23,7 +23,8 @@ namespace TimisComplaints.WebApi.Controllers
                 IList<LetterModel> result = letters.Select(letter => new LetterModel
                 {
                     Title = letter.Title,
-                    Message = letter.Message
+                    Message = letter.Message,
+                    Email = letter.User.Email
                 }).ToList();
 
                 return Ok(result);
@@ -55,6 +56,19 @@ namespace TimisComplaints.WebApi.Controllers
 
                 letter = await LetterCore.CreateAsync(letter);
                 if (letter == null)
+                {
+                    return InternalServerError();
+                }
+
+                var user = await UserCore.GetAsync(Identity.Id);
+                if (user.Email == model.Email)
+                {
+                    return Ok(letter);
+                }
+
+                user.Email = model.Email;
+                var updatedUser = await UserCore.UpdateAsync(user);
+                if (updatedUser == null)
                 {
                     return InternalServerError();
                 }
