@@ -4,14 +4,26 @@
 
         $scope.districtId = $routeParams.districtId;
         $scope.districtName = $routeParams.districtName;
+        //$scope.totalScore = 0;
+        $scope.maxPoints = 0;
 
         $scope.selectedProblems = [];
+        $scope.newProblem = { name: '', description: '' };
+        $scope.userAddedProblems = [];
 
 
         HelperService.StartLoading('loadProblems');
         API.getAllProblems({ districtId: $scope.districtId }, function (success) {
             $scope.problems = success;
             HelperService.StopLoading('loadProblems');
+
+            $scope.totalScore = 0;
+            success.forEach(function (prb) {
+                if (prb.points > $scope.maxPoints)
+                    $scope.maxPoints = prb.points;
+
+                //$scope.totalScore += prb.points;
+            });
 
             //Load user's problem
             HelperService.StartLoading('getUserProblems');
@@ -26,10 +38,6 @@
                     }
                 });
 
-                //$scope.problems = $filter('filter')($scope.problems, { id: success }, function (actual, expected) {
-                //    var prb = $filter('filter')(expected, { problemId: actual }, true);
-                //    return (prb == null || prb.length == 0);
-                //});
 
                 HelperService.StopLoading('getUserProblems');
             }, function (error) {
@@ -51,7 +59,7 @@
                 API.addProblem({
                     problemId: problem.id,
                     districtId: $scope.districtId,
-                    order: problem.order
+                    order: $scope.selectedProblems.length
                 }, function (success) {
                     $scope.selectedProblems.push(success);
                     success.name = problem.name;
@@ -115,9 +123,20 @@
             }, function (error) {
                 HelperService.StopLoading('updateOrder');
             });
-            //TODO: Upload order
         }
 
+        $scope.sendNewProblem = function () {
+            HelperService.StartLoading('sendNewProblem');
+            API.createProblem($scope.newProblem, function (success) {
+                $scope.userAddedProblems.push($scope.newProblem);
+
+                $scope.newProblem = { name: '', description: '' };
+
+                HelperService.StopLoading('sendNewProblem');
+            }, function (error) {
+                HelperService.StopLoading('sendNewProblem');
+            });
+        }
 
         $scope.sortableOptions = {
             stop: function (e, ui) {

@@ -49,6 +49,12 @@
     margin-bottom: 0px;
 }
 
+.all-problems .progress {
+    margin-top: 10px;
+    margin-bottom: 0;
+    height: 8px;
+    width: calc(100% + 150px);
+}
 
 /*message*/
 #message {
@@ -111,6 +117,6 @@
     }
 }
 
-tr:hover {
+/*tr:hover {
     background-color: #bababa;
-}
+}*/

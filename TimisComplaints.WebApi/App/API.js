@@ -25,7 +25,7 @@
                 isArray: true
             },
 
-            getMe:{
+            getMe: {
                 url: baseUrl + 'account/whoAmI',
                 method: 'GET',
                 isArray: false
@@ -44,7 +44,7 @@
             },
 
             //User problems
-            getUserProblems:{
+            getUserProblems: {
                 url: baseUrl + 'userProblem/GetAll',///:districtId',
                 method: 'GET',
                 //params: { districtId: '@districtId' },
@@ -65,6 +65,11 @@
                 url: baseUrl + 'userProblem/updateOrder',
                 method: 'POST',
                 isArray: true
+            },
+            createProblem: {
+                url: baseUrl + 'problem/Create',
+                method: 'POST',
+                isArray: false
             },
 
             getAllLetters: {
@@ -88,7 +93,7 @@
             //    prams: {ids:'@ids'},
             //    isArray:false
             //},
-            
+
 
 
         });
