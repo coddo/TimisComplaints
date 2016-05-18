@@ -24,7 +24,8 @@ namespace TimisComplaints.WebApi.Controllers
                 {
                     Title = letter.Title,
                     Message = letter.Message,
-                    Email = letter.User.Email
+                    Email = letter.User.Email,
+                    Date = letter.Date
                 }).ToList();
 
                 return Ok(result);

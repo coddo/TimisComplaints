@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace TimisComplaints.WebApi.Models
 {
@@ -12,5 +13,7 @@ namespace TimisComplaints.WebApi.Models
 
         [EmailAddress]
         public string Email { get; set; }
+
+        public DateTime Date { get; set; }
     }
 }
