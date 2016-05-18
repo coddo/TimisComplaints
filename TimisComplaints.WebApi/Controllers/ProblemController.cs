@@ -135,8 +135,9 @@ namespace TimisComplaints.WebApi.Controllers
                     return BadRequest(ModelState);
                 }
 
-                var problem = new Problem()
+                var problem = new Problem
                 {
+                    UserId = Identity.Id,
                     Name = model.Name,
                     Description = model.Description
                 };
