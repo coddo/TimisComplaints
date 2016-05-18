@@ -18,7 +18,7 @@ namespace TimisComplaints.WebApi.Controllers.Base
                 var user = new User
                 {
                     Id = Guid.NewGuid(),
-                    SessionKey = Encryptor.Md5Hash(new Guid().ToString())
+                    SessionKey = Encryptor.Md5Hash(Guid.NewGuid().ToString())
                 };
 
                 Identity = Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false).GetAwaiter().GetResult();
@@ -36,6 +36,6 @@ namespace TimisComplaints.WebApi.Controllers.Base
             }
         }
 
-        protected User Identity { get; private set; }
+        protected User Identity { get; }
     }
 }
