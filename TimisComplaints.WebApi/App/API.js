@@ -66,12 +66,20 @@
                 method: 'POST',
                 isArray: true
             },
+
+            //User created problems
             createProblem: {
                 url: baseUrl + 'problem/Create',
                 method: 'POST',
                 isArray: false
             },
+            getMyCreatedProblems: {
+                url: baseUrl + 'problem/GetAllUnacceptedForUser',
+                method: 'GET',
+                isArray: true
+            },
 
+            //Letters
             getAllLetters: {
                 url: baseUrl + 'letter/GetAll',
                 method: 'GET',

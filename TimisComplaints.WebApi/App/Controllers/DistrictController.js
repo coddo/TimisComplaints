@@ -11,44 +11,60 @@
         $scope.newProblem = { name: '', description: '' };
         $scope.userAddedProblems = [];
 
+        function init() {
+            HelperService.StartLoading('loadProblems');
+            API.getAllProblems({ districtId: $scope.districtId }, function (success) {
+                $scope.problems = success;
+                HelperService.StopLoading('loadProblems');
 
-        HelperService.StartLoading('loadProblems');
-        API.getAllProblems({ districtId: $scope.districtId }, function (success) {
-            $scope.problems = success;
-            HelperService.StopLoading('loadProblems');
+                $scope.totalScore = 0;
+                success.forEach(function (prb) {
+                    if (prb.points > $scope.maxPoints)
+                        $scope.maxPoints = prb.points;
 
-            $scope.totalScore = 0;
-            success.forEach(function (prb) {
-                if (prb.points > $scope.maxPoints)
-                    $scope.maxPoints = prb.points;
-
-                //$scope.totalScore += prb.points;
-            });
-
-            //Load user's problem
-            HelperService.StartLoading('getUserProblems');
-            API.getUserProblems({ districtId: $scope.districtId }, function (success) {
-                $scope.selectedProblems = success;
-
-                //remove selected problems from list
-                $scope.selectedProblems.forEach(function (selPrb) {
-                    var prb = $filter('filter')($scope.problems, { id: selPrb.problemId }, true);
-                    if (prb != null && prb.length == 1) {
-                        prb[0].selected = true;
-                    }
+                    //$scope.totalScore += prb.points;
                 });
 
+                //Load user's problem
+                HelperService.StartLoading('getUserProblems');
+                API.getUserProblems({ districtId: $scope.districtId }, function (success) {
+                    $scope.selectedProblems = success;
 
-                HelperService.StopLoading('getUserProblems');
+                    //remove selected problems from list
+                    $scope.selectedProblems.forEach(function (selPrb) {
+                        var prb = $filter('filter')($scope.problems, { id: selPrb.problemId }, true);
+                        if (prb != null && prb.length == 1) {
+                            prb[0].selected = true;
+                        }
+                    });
+
+
+                    HelperService.StopLoading('getUserProblems');
+                }, function (error) {
+                    HelperService.StopLoading('getUserProblems');
+                    HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+                });
+
             }, function (error) {
-                HelperService.StopLoading('getUserProblems');
+                HelperService.StopLoading('loadProblems');
                 HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
             });
 
-        }, function (error) {
-            HelperService.StopLoading('loadProblems');
-            HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
-        });
+            //getMyCreatedProblems
+            HelperService.StartLoading('getMyCreatedProblems');
+            API.getMyCreatedProblems(function (success) {
+                $scope.userAddedProblems = success;
+
+                HelperService.StopLoading('getMyCreatedProblems');
+            }, function (error) {
+                HelperService.StopLoading('getMyCreatedProblems');
+                HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+            });
+        }
+
+        init();
+
+       
 
         $scope.selectProblem = function (problem, $event) {
 
@@ -131,6 +147,8 @@
                 $scope.userAddedProblems.push($scope.newProblem);
 
                 $scope.newProblem = { name: '', description: '' };
+
+                HelperService.ShowMessage('alert-success', "Problema a fost trimisă cu succes!");
 
                 HelperService.StopLoading('sendNewProblem');
             }, function (error) {
