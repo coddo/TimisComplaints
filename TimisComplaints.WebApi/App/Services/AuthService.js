@@ -43,6 +43,7 @@
                 HelperService.StopLoading('authenticate');
             }, function (error) {
                 HelperService.StopLoading('authenticate');
+                HelperService.ShowMessage('alert-danger', 'Verificati conexiunea la internet si reincarcati pagina!');
             });
         }
 

@@ -70,11 +70,11 @@ namespace TimisComplaints.WebApi.Controllers
 
         [HttpGet]
         [ActionName("GetAllUnacceptedForUser")]
-        public async Task<IHttpActionResult> GetAllUnacceptedForUser(Guid userId)
+        public async Task<IHttpActionResult> GetAllUnacceptedForUser()
         {
             try
             {
-                var problems = await ProblemCore.GetAllUnaccepted(userId);
+                var problems = await ProblemCore.GetAllUnaccepted(Identity.Id);
                 if (problems == null)
                 {
                     return BadRequest("Invalid Id or no problems found");
