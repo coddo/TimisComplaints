@@ -1,4 +1,6 @@
-﻿insert into Problems(Id,UserId,Name,Description) values('19325cbe-1110-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Reabilitarea cladirilor','Reabilitarea cladirilor, realizarea termoizolatiei a fatadelor, a podurilor si invelitorii.');
+﻿insert into Users (Id) values ('00000000-0000-0000-0000-000000000000');
+
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1110-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Reabilitarea cladirilor','Reabilitarea cladirilor, realizarea termoizolatiei a fatadelor, a podurilor si invelitorii.');
 insert into Problems(Id,UserId,Name,Description) values('19325cbe-1111-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa spatiilor de parcare','Lipsa spatiilor de parcare amenajate, accesabilitate redusa, circulatii greoaie.');
 insert into Problems(Id,UserId,Name,Description) values('19325cbe-1112-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Realizare benzi','Realizarea a doua benzi de circulatii pe unele strazi.');
 insert into Problems(Id,UserId,Name,Description) values('19325cbe-1113-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa spatiilor verzi','Lipsa spatiilor verzi amenjate, a zonelor plantate .');

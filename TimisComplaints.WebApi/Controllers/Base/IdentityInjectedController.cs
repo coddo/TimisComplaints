@@ -13,29 +13,31 @@ namespace TimisComplaints.WebApi.Controllers.Base
         {
             var cookie = IdentityInjector.GetCookie();
 
-            if (cookie == null)
-            {
-                var user = new User
-                {
-                    Id = Guid.NewGuid(),
-                    SessionKey = Encryptor.Md5Hash(Guid.NewGuid().ToString())
-                };
-
-                Identity = Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false).GetAwaiter().GetResult();
-
-                IdentityInjector.SetCookie(user.SessionKey, DateTime.Now.AddYears(10));
-            }
-            else
+            Identity = null;
+            if (cookie != null)
             {
                 Identity = Task.Run(() => UserCore.GetAsync(cookie)).ConfigureAwait(false).GetAwaiter().GetResult();
             }
 
             if (Identity == null)
             {
-                Identity = new User();
+                Identity = CreateNewUser();
             }
         }
 
         protected User Identity { get; }
+
+        private User CreateNewUser()
+        {
+            var user = new User
+            {
+                Id = Guid.NewGuid(),
+                SessionKey = Encryptor.Md5Hash(Guid.NewGuid().ToString())
+            };
+
+            IdentityInjector.SetCookie(user.SessionKey, DateTime.Now.AddYears(10));
+
+            return Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false).GetAwaiter().GetResult();
+        }
     }
 }
