@@ -10,6 +10,16 @@
     width: 100%;
 }
 
+.index-letters {
+	margin-top: 20px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
 
 /*District page*/
 .problem {
