@@ -69,14 +69,12 @@
     <Build Include="dbo\Tables\Letters.sql" />
     <Build Include="dbo\Tables\Districts.sql" />
     <Build Include="dbo\Tables\DistrictProblemAssignments.sql" />
-    <None Include="dbo\Scripts\AddDistricts.sql" />
     <None Include="dbo\Scripts\AddProblems.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="TimisComplaints.Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="dbo\Scripts\AddDistrictProblemAssignments.sql" />
     <None Include="dbo\Scripts\AddMapDistricts.sql" />
     <None Include="dbo\Scripts\InsertDistrictProblemAssignments.sql" />
   </ItemGroup>
