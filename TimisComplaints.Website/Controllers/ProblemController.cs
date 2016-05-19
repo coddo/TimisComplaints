@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
-using TimisComplaints.WebApi.Models;
-using WebGrease.Css.Extensions;
+using TimisComplaints.Website.Models;
 
-namespace TimisComplaints.WebApi.Controllers
+namespace TimisComplaints.Website.Controllers
 {
     public class ProblemController : IdentityInjectedController
     {

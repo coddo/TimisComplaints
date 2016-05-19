@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
 
-namespace TimisComplaints.WebApi.Controllers
+namespace TimisComplaints.Website.Controllers
 {
     public class ValuesController : ApiController
     {

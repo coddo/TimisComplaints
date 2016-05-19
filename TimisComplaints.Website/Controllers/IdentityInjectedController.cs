@@ -5,7 +5,7 @@ using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
 using TimisComplaints.WebApi.Filters;
 
-namespace TimisComplaints.WebApi.Controllers
+namespace TimisComplaints.Website.Controllers
 {
     public abstract class IdentityInjectedController : ApiController
     {

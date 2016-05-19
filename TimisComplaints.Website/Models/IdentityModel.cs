@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TimisComplaints.WebApi.Models
+﻿namespace TimisComplaints.Website.Models
 {
     public class IdentityModel
     {

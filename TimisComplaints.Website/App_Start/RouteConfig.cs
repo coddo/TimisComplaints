@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace TimisComplaints
+namespace TimisComplaints.Website
 {
     public class RouteConfig
     {

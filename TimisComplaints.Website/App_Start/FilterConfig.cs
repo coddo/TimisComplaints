@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace TimisComplaints
+namespace TimisComplaints.Website
 {
     public class FilterConfig
     {

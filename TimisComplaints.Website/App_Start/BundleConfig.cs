@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace TimisComplaints
+namespace TimisComplaints.Website
 {
     public class BundleConfig
     {

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Web.Http;
-using TimisComplaints.WebApi.Models;
+using TimisComplaints.Website.Models;
 
-namespace TimisComplaints.WebApi.Controllers
+namespace TimisComplaints.Website.Controllers
 {
     public class AccountController : IdentityInjectedController
     {

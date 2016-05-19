@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace TimisComplaints.WebApi.Models
+namespace TimisComplaints.Website.Models
 {
     public class LetterModel
     {

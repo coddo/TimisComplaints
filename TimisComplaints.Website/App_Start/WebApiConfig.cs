@@ -2,7 +2,7 @@
 using System.Web.Http;
 using Newtonsoft.Json.Serialization;
 
-namespace TimisComplaints
+namespace TimisComplaints.Website
 {
     public static class WebApiConfig
     {
