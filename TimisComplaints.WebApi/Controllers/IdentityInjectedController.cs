@@ -5,7 +5,7 @@ using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.DataLayer;
 using TimisComplaints.WebApi.Filters;
 
-namespace TimisComplaints.WebApi.Controllers.Base
+namespace TimisComplaints.WebApi.Controllers
 {
     public abstract class IdentityInjectedController : ApiController
     {
@@ -35,9 +35,11 @@ namespace TimisComplaints.WebApi.Controllers.Base
                 SessionKey = Encryptor.Md5Hash(Guid.NewGuid().ToString())
             };
 
+            var createUserTask = Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false);
+
             IdentityInjector.SetCookie(user.SessionKey, DateTime.Now.AddYears(10));
 
-            return Task.Run(() => UserCore.CreateAsync(user)).ConfigureAwait(false).GetAwaiter().GetResult();
+            return createUserTask.GetAwaiter().GetResult();
         }
     }
 }

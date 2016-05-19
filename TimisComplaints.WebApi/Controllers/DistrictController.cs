@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using TimisComplaints.BusinessLogicLayer.Core;
-using TimisComplaints.WebApi.Controllers.Base;
 using TimisComplaints.WebApi.Models;
 
 namespace TimisComplaints.WebApi.Controllers
