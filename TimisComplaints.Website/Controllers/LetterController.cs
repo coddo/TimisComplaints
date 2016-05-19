@@ -25,7 +25,7 @@ namespace TimisComplaints.Website.Controllers
                     Message = letter.Message,
                     Email = letter.User.Email,
                     Date = letter.Date
-                }).ToList();
+                }).OrderByDescending(letter => letter.Date).ToList();
 
                 return Ok(result);
             }
