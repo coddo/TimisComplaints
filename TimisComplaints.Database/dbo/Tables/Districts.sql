@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Districts] (
+    [Id]   UNIQUEIDENTIFIER NOT NULL,
+    [Name] NVARCHAR (100)   NOT NULL,
+    CONSTRAINT [PK_Districts] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

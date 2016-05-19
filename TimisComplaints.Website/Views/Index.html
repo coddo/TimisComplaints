@@ -1,0 +1,20 @@
+﻿<!--<div class="col-sm-12 col-md-12 col-lg-12 col-xs-12">-->
+<div id="index-districts-block" class="container">
+	<h1>Bine ați venit pe GlasulTimișului.ro</h1>
+	<h2>Pentru a începe, alegeți cartierul din care faceți parte.</h2>
+
+	<br/>
+
+	<div ng-repeat="district in AllDistricts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 district">
+		<a href="/cartier/{{district.id}}/{{district.name}}" class="btn btn-primary btn-lg btn-district"> {{district.name}}</a>
+	</div>
+</div>
+
+<hr/>
+
+<div id="index-letters-block" class="container index-letters">
+	<h1>Scrisorile publicului</h1>
+	<br/>
+
+	<div ng-include="'../Views/Letter.html'" ng-controller="LetterController"></div>
+</div>

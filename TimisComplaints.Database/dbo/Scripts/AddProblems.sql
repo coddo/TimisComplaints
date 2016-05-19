@@ -1,0 +1,12 @@
+﻿insert into Users (Id) values ('00000000-0000-0000-0000-000000000000');
+
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1110-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Reabilitarea cladirilor','Reabilitarea cladirilor, realizarea termoizolatiei a fatadelor, a podurilor si invelitorii.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1111-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa spatiilor de parcare','Lipsa spatiilor de parcare amenajate, accesabilitate redusa, circulatii greoaie.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1112-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Realizare benzi','Realizarea a doua benzi de circulatii pe unele strazi.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1113-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa spatiilor verzi','Lipsa spatiilor verzi amenjate, a zonelor plantate .');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1114-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa zone de agrement','Lipsa unor zone de agrement pentru copii.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1115-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa dotari','Lipsa dotarilor pentru personele cu handicap.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1116-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Lipsa unor spatii','Lipsa unor spatii cu functiuni complementare – gradinita, scoala.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1117-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Asfaltare','Asfaltarea strazilor.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1118-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Pavarea, amenajare','Pavarea trotuarelor, amenajarea cu bancute, iluminat si vegetatie a circulatiilor pietonale.');
+insert into Problems(Id,UserId,Name,Description) values('19325cbe-1119-496b-b240-01584567a18e','00000000-0000-0000-0000-000000000000','Zone pentru colectarea deseurilor','Realizazarea unor zone special amenajate pentru colectarea /depozitarea gunoiului (tomberoane).');

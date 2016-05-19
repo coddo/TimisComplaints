@@ -1,0 +1,168 @@
+﻿body, h1, h2, h3, h4, h5 {
+    font-family: 'Open Sans' !important;
+}
+
+.body-background {
+    z-index: -1;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-image: url('/Content/Images/back4.jpg');
+    background-size: cover;
+    opacity: 0.4;
+}
+
+* {
+    border-radius: 0 !important;
+}
+
+.district {
+    padding: 10px;
+}
+
+.btn-district {
+    width: 100%;
+}
+
+.index-letters {
+    margin-top: 20px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    color: #333; /* old IE */
+    background-color: #333; /* Modern Browsers */
+}
+
+/*District page*/
+.problem {
+    cursor: pointer;
+    padding-right: 170px;
+}
+
+    .problem:hover, .my-problem:hover {
+        background-color: #f5f5f5;
+    }
+
+.problem-btn {
+    float: right;
+    margin-right: -160px;
+}
+
+.my-problem {
+    cursor: move;
+    padding-right: 110px;
+}
+
+.my-problem-btn {
+    float: right;
+    margin-right: -100px;
+}
+
+.my-problems-box {
+    border: 3px dashed gray;
+    width: 100%;
+    min-height: 75px;
+    text-align: center;
+    padding: 5px;
+}
+
+.my-problems-list {
+    text-align: left;
+    margin-bottom: 0px;
+}
+
+.all-problems .progress {
+    margin-top: 10px;
+    margin-bottom: 0;
+    height: 8px;
+    width: calc(100% + 150px);
+}
+
+/*message*/
+#message {
+    display: none;
+    position: fixed;
+    z-index: 9000;
+    width: auto;
+    height: auto;
+    font-size: 24px;
+    right: 10px;
+    bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+}
+
+/*effects*/
+.loading {
+    opacity: 0;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    margin-left: -300px;
+    margin-top: -100px;
+    width: 600px;
+    height: 200px;
+    background-image: url("/Content/Images/loading.gif");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-animation: fadeInOut 1s infinite;
+    animation: fadeInOut 1s infinite;
+    display: none;
+    z-index: 9000;
+}
+
+@-webkit-keyframes fadeInOut {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.5;
+    }
+}
+
+/*tr:hover {
+    background-color: #bababa;
+}*/
+
+
+
+
+/*Bootstrap overrides*/
+
+.well {
+    background-color: rgba(245, 245, 245, 0.6) !important;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.list-group-item-warning {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+
+.form-control {
+    background-color: rgba(255,255,255,0.65) !important;
+}
