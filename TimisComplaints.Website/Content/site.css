@@ -2,6 +2,20 @@
     font-family: 'Open Sans' !important;
 }
 
+.body-background {
+    z-index: -1;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-image: url('/Content/Images/back4.jpg');
+    background-size: cover;
+    opacity: 0.4;
+}
+
+* {
+    border-radius: 0 !important;
+}
+
 .district {
     padding: 10px;
 }
@@ -11,7 +25,7 @@
 }
 
 .index-letters {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 
 hr {
@@ -130,3 +144,25 @@ hr {
 /*tr:hover {
     background-color: #bababa;
 }*/
+
+
+
+
+/*Bootstrap overrides*/
+
+.well {
+    background-color: rgba(245, 245, 245, 0.6) !important;
+}
+
+.list-group-item {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+.list-group-item-warning {
+    background-color: rgba(255, 255, 255, 0.65) !important;
+}
+
+
+.form-control {
+    background-color: rgba(255,255,255,0.65) !important;
+}
