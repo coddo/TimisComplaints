@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimisComplaints.WebApi", "TimisComplaints.WebApi\TimisComplaints.WebApi.csproj", "{93EDABFC-7449-4D2A-8B91-79AF7612048C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TimisComplaints.Website", "TimisComplaints.Website\TimisComplaints.Website.csproj", "{93EDABFC-7449-4D2A-8B91-79AF7612048C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{0A7692BF-0A1C-4AF0-95DF-6CD493E64AC7}"
 EndProject
