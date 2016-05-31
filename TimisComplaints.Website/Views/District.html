@@ -5,7 +5,7 @@
     </h2>
     <h4><b>Reordonează după priorități!</b></h4>
     <div class="my-problems-box" id="my-problem-box">
-        <div ng-show="selectedProblems==null || selectedProblems.length<1" style="padding:15px;color:grey;font-size:24px;display:inline-block">
+        <div ng-show="selectedProblems==null || selectedProblems.length<1" style="padding: 15px; color: grey; font-size: 24px; display: inline-block">
             <p>Începe prin a adăuga probleme de mai jos!</p>
             <p>La încheierea operațiilor veți vedea ordinea problemelor din cartierul dvs.</p>
         </div>
@@ -20,6 +20,8 @@
             </div>
         </div>
     </div>
+    <br/>
+    <a ng-href="/probleme/{{districtId}}/{{districtName}}" class="btn btn-primary">Confirma alegerea</a>
 
     <br />
 

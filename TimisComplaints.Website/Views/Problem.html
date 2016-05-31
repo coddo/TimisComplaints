@@ -1,0 +1,9 @@
+﻿<div class="container">
+    <div class="list-group all-problems">
+        <div ng-repeat="prb in problems | orderBy:'-points'" class="list-group-item problem">
+            <h4 class="list-group-item-heading">{{::prb.name}}</h4>
+            <p class="list-group-item-text">{{::prb.description}} </p>
+            <uib-progressbar value="maxPoints>0 ? prb.points*100/maxPoints : 0" type="danger"></uib-progressbar>
+        </div>
+    </div>
+</div>
