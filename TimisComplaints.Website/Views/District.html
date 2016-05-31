@@ -3,10 +3,11 @@
     <h2>
         Top probleme ale cartierului <b>{{districtName}}</b>
     </h2>
-    <h4>Reordonează după priorități!</h4>
+    <h4><b>Reordonează după priorități!</b></h4>
     <div class="my-problems-box" id="my-problem-box">
         <div ng-show="selectedProblems==null || selectedProblems.length<1" style="padding:15px;color:grey;font-size:24px;display:inline-block">
-            Începe prin a adăuga probleme de mai jos!
+            <p>Începe prin a adăuga probleme de mai jos!</p>
+            <p>La încheierea operațiilor veți vedea ordinea problemelor din cartierul dvs.</p>
         </div>
 
         <div class="list-group my-problems-list" ui-sortable="sortableOptions" ng-model="selectedProblems" ng-change="problemsChanged()">
