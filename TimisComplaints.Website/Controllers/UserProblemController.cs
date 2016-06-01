@@ -24,10 +24,13 @@ namespace TimisComplaints.Website.Controllers
                 }
 
                 var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, (Guid) districtId).ConfigureAwait(false);
-                var result = await UserProblemCore.DeleteAsync(userProblems).ConfigureAwait(false);
-                if (!result)
+                if (userProblems != null && userProblems.Count > 0)
                 {
-                    return InternalServerError();
+                    var result = await UserProblemCore.DeleteAsync(userProblems).ConfigureAwait(false);
+                    if (!result)
+                    {
+                        return InternalServerError();
+                    }
                 }
 
                 var newUserProblems = modelCollection.Select(model => new UserProblem
@@ -45,7 +48,7 @@ namespace TimisComplaints.Website.Controllers
                     return InternalServerError();
                 }
 
-                return Ok(createdProblems);
+                return Ok();
             }
             catch (Exception)
             {
