@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="../app/api.js" />
 /// <reference path="../app/app.js" />
+/// <reference path="../app/controllers/authenticationcontroller.js" />
 /// <reference path="../app/controllers/dashboardcontroller.js" />
 /// <reference path="../app/controllers/districtcontroller.js" />
 /// <reference path="../app/controllers/indexcontroller.js" />

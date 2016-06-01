@@ -186,6 +186,7 @@
     <Content Include="App\Controllers\IndexController.js" />
     <Content Include="App\Controllers\LetterController.js" />
     <Content Include="App\Controllers\ProblemController.js" />
+    <Content Include="App\Controllers\AuthenticationController.js" />
     <Content Include="App\Services\AuthService.js" />
     <Content Include="App\Services\HelperService.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -281,6 +282,7 @@
     <Content Include="Views\Index.html" />
     <Content Include="Views\Letter.html" />
     <Content Include="Views\Problem.html" />
+    <Content Include="Views\Authentication.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

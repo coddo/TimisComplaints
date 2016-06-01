@@ -84,7 +84,7 @@
                 isArray: true
             },
             getAllUnacceptedProblems: {
-                url: baseUrl + 'problem/GetAllUnaccepted',
+                url: baseUrl + 'admin/GetAllUnaccepted',
                 method: 'GET',
                 isArray: true
             },
@@ -122,6 +122,12 @@
             //    isArray:false
             //},
 
+            //Admin
+            authenticate: {
+                url: baseUrl + 'admin/Authenticate',
+                method: 'POST',
+                isArray: false
+            }
 
 
         });
