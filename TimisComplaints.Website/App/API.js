@@ -88,6 +88,11 @@
                 method: 'POST',
                 isArray: false  
             },
+			   deleteProblem: {
+				   url: baseUrl + "problem/Delete",
+					method: 'POST',
+					isArray: false
+			   },
 
             //Letters
             getAllLetters: {
