@@ -94,34 +94,6 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
-        [HttpGet]
-        [ActionName("GetAllUnaccepted")]
-        public async Task<IHttpActionResult> GetAllUnaccepted()
-        {
-            try
-            {
-                var problems = await ProblemCore.GetAllUnaccepted();
-                if (problems == null)
-                {
-                    return BadRequest("Invalid Id or no problems found");
-                }
-
-                var model = problems.Select(p => new ProblemModel
-                {
-                    Id = p.Id,
-                    UserId = p.UserId,
-                    Name = p.Name,
-                    Description = p.Description
-                }).ToArray();
-
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
         [HttpPost]
         [ActionName("Create")]
         public async Task<IHttpActionResult> Create([FromBody] ProblemModel model)
