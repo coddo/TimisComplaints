@@ -17,6 +17,10 @@
                 templateUrl: '/Views/Letter.html',
                 controller: 'LetterController'
             })
+            .when('/probleme/:districtId/:districtName', {
+                templateUrl: '/Views/Problem.html',
+                controller: 'ProblemController'
+            })
             .otherwise({
                 templateUrl: '/Views/Inexistent.html',
             });

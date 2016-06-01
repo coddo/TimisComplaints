@@ -4,6 +4,7 @@
 /// <reference path="../app/controllers/districtcontroller.js" />
 /// <reference path="../app/controllers/indexcontroller.js" />
 /// <reference path="../app/controllers/lettercontroller.js" />
+/// <reference path="../app/controllers/problemcontroller.js" />
 /// <reference path="../app/services/authservice.js" />
 /// <reference path="../app/services/helperservice.js" />
 /// <reference path="angular.min.js" />

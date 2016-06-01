@@ -1,0 +1,25 @@
+﻿<div class="container">
+    <h3><b>Alegerea dumneavoastra a fost confirmata.</b></h3>
+    <p style="font-size: 20px">
+        <b>
+            Acest site este realizat la initiativa Partdului National Democrat - PND Timis
+            de catre studentii din anul 3 de la facultatea de Automatica si Calculatoare si
+            face parte din platforma program transparentizarea administratiei si implicarea activa a cetatenilor.
+            Va multumim pentru implicare.
+        </b>
+    </p>
+</div>
+<hr/>
+<div class="container">
+    <h2>Top probleme ale cartierului <b>{{districtName}}</b></h2>
+    <div class="list-group all-problems">
+        <div class="list-group all-problems">
+            <div ng-repeat="prb in problems | orderBy:'-points'" class="list-group-item problem">
+                <h4 class="list-group-item-heading">{{::prb.name}}</h4>
+                <p class="list-group-item-text">{{::prb.description}} </p>
+                <uib-progressbar value="maxPoints>0 ? prb.points*100/maxPoints : 0" type="danger"></uib-progressbar>
+            </div>
+        </div>
+    </div>
+    <a ng-href="/cartier/{{districtId}}/{{districtName}}" class="pull-right"><span style="font-size: 20px"><b>Întoarce-te la chestionar</b></span></a>
+</div>
