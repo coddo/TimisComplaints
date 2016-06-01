@@ -127,12 +127,11 @@
 
         $scope.confirmSelectedProblems = function () {
             HelperService.StartLoading('confirmSelectedProblems');
-            API.confirmUserProblems($scope.selectedProblems, function(success) {
+            API.confirmUserProblems({ districtId: $scope.districtId, userProblems: $scope.selectedProblems }, function(success) {
                 HelperService.StopLoading('confirmSelectedProblems');
                 $location.path('/probleme/' + $scope.districtId + '/' + $scope.districtName);
             }, function (error) {
                 HelperService.StopLoading('confirmSelectedProblems');
                 HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
-            });
-        }
+        })};
     });
