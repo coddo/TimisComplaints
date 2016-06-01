@@ -72,9 +72,6 @@
     <None Include="dbo\Scripts\AddProblems.sql" />
   </ItemGroup>
   <ItemGroup>
-    <RefactorLog Include="TimisComplaints.Database.refactorlog" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="dbo\Scripts\AddMapDistricts.sql" />
     <None Include="dbo\Scripts\InsertDistrictProblemAssignments.sql" />
   </ItemGroup>

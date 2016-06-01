@@ -20,6 +20,14 @@
             .when('/probleme/:districtId/:districtName', {
                 templateUrl: '/Views/Problem.html',
                 controller: 'ProblemController'
+            })       
+            .when('/admin/dashboard', {
+                templateUrl: '/Views/Dashboard.html',
+                controller: 'DashboardController'
+            })
+            .when('/admin', {
+                templateUrl: '/Views/Authentication.html',
+                controller: 'AuthenticationController'
             })
             .otherwise({
                 templateUrl: '/Views/Inexistent.html',
