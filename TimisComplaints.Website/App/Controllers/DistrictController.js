@@ -90,6 +90,8 @@
                 if (originalProblem != null && originalProblem.length == 1) {
                     originalProblem[0].selected = false;
                 }
+
+                $scope.problemsChanged();
             }
         }
 
@@ -99,14 +101,6 @@
                 prb.order = index;
 
                 problemsOrder.push({ id: prb.id, order: index });
-            });
-
-            HelperService.StartLoading('updateOrder');
-            API.updateOrder(problemsOrder, function (success) {
-
-                HelperService.StopLoading('updateOrder');
-            }, function (error) {
-                HelperService.StopLoading('updateOrder');
             });
         }
 
