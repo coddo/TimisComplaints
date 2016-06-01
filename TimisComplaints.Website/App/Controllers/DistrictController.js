@@ -1,6 +1,6 @@
 ﻿angular
     .module('timisComplaints')
-    .controller('DistrictController', function (AuthService, $routeParams, $scope, API, HelperService, $timeout, $filter) {
+    .controller('DistrictController', function (AuthService, $routeParams, $scope, API, HelperService, $timeout, $filter, $location) {
 
         $scope.districtId = $routeParams.districtId;
         $scope.districtName = $routeParams.districtName;
@@ -125,4 +125,8 @@
             }
         };
 
+        $scope.confirmSelectedProblems = function () {
+            console.log($scope.selectedProblems);
+            $location.path('/probleme/' + $scope.districtId + '/' + $scope.districtName);
+        }
     });
