@@ -126,7 +126,13 @@
         };
 
         $scope.confirmSelectedProblems = function () {
-            console.log($scope.selectedProblems);
-            $location.path('/probleme/' + $scope.districtId + '/' + $scope.districtName);
+            HelperService.StartLoading('confirmSelectedProblems');
+            API.confirmUserProblems($scope.selectedProblems, function(success) {
+                HelperService.StartLoading('confirmSelectedProblems');
+                $location.path('/probleme/' + $scope.districtId + '/' + $scope.districtName);
+            }, function (error) {
+                HelperService.StopLoading('confirmSelectedProblems');
+                HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+            });
         }
     });

@@ -66,6 +66,11 @@
                 method: 'POST',
                 isArray: true
             },
+            confirmUserProblems: {
+                url: baseUrl + 'userProblem/assign',
+                method: 'POST',
+                isArray: false
+            },
 
             //User created problems
             createProblem: {
