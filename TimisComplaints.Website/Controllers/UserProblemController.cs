@@ -17,13 +17,14 @@ namespace TimisComplaints.Website.Controllers
         {
             try
             {
-                var districtId = modelCollection?.First().Id;
-                if (districtId == null)
+                if (modelCollection == null || modelCollection.Count == 0)
                 {
                     return BadRequest();
                 }
 
-                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, (Guid) districtId).ConfigureAwait(false);
+                var districtId = modelCollection.First().Id;
+
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, districtId).ConfigureAwait(false);
                 if (userProblems != null && userProblems.Count > 0)
                 {
                     var result = await UserProblemCore.DeleteAsync(userProblems).ConfigureAwait(false);
