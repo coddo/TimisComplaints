@@ -275,6 +275,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Views\Dashboard.html" />
     <Content Include="Views\District.html" />
+    <Content Include="Views\Inexistent.html" />
     <Content Include="Views\Index.html" />
     <Content Include="Views\Letter.html" />
     <Content Include="Views\Problem.html" />

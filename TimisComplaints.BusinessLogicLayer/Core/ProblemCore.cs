@@ -70,7 +70,10 @@ namespace TimisComplaints.BusinessLogicLayer.Core
         {
             using (var problemRepository = new ProblemRepository())
             {
-                var problem = await problemRepository.GetAsync(id);
+                var problem = await problemRepository.GetAsync(id, new[]
+                {
+                    nameof(Problem.Districts)
+                });
                 problem.UserId = Guid.Empty;
 
                 return await problemRepository.UpdateAsync(problem);

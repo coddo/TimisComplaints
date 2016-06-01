@@ -215,6 +215,11 @@ namespace TimisComplaints.Website.Controllers
             try
             {
                 var result = await ProblemCore.AcceptProblem(model.Id);
+
+                //Link the problem to all the districts
+                result.Districts = await DistrictCore.GetAllAsync();
+                result = await ProblemCore.UpdateAsync(result);
+
                 if (result == null)
                 {
                     return BadRequest("Error accepting problem");

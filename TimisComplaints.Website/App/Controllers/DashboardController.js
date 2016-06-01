@@ -14,9 +14,13 @@
             });
         }
 
-        $scope.acceptProblem = function (problemId) {
+        $scope.acceptProblem = function (problem) {
             HelperService.StartLoading('acceptProblem');
-            API.acceptProblem({ id: problemId }, function (success) {
+            API.acceptProblem({ id: problem.id }, function (success) {
+                
+                var index = $scope.unacceptedProblems.indexOf(problem);
+                $scope.unacceptedProblems.splice(index, 1);
+
                 HelperService.StopLoading('acceptProblem');
             }, function (error) {
                 HelperService.StopLoading('acceptProblem');
