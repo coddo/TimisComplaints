@@ -92,13 +92,30 @@ namespace TimisComplaints.DataLayer.Repositories.Base
 
         protected async Task RemoveAsync(T item)
         {
+            if (mContext.Entry(item).State == EntityState.Detached)
+            {
+                mDbSet.Attach(item);
+            }
+
             mDbSet.Remove(item);
 
             await mContext.SaveChangesAsync();
         }
 
-        protected async Task RemoveAsync(IEnumerable<T> items)
+        protected async Task RemoveAsync(IList<T> items)
         {
+            mContext.Configuration.AutoDetectChangesEnabled = false;
+
+            foreach (var item in items)
+            {
+                if (mContext.Entry(item).State == EntityState.Detached)
+                {
+                    mDbSet.Attach(item);
+                }
+            }
+
+            mContext.Configuration.AutoDetectChangesEnabled = true;
+
             mDbSet.RemoveRange(items);
 
             await mContext.SaveChangesAsync();

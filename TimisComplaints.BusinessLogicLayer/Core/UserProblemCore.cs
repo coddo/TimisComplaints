@@ -16,6 +16,14 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             }
         }
 
+        public static async Task<IList<UserProblem>> CreateAsync(IList<UserProblem> userProblemCollection)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.CreateAsync(userProblemCollection);
+            }
+        }
+
         public static async Task<IList<UserProblem>> GetUserProblemsAsync(Guid userId, Guid districtId)
         {
             if (userId == Guid.Empty || districtId == Guid.Empty)
@@ -58,6 +66,14 @@ namespace TimisComplaints.BusinessLogicLayer.Core
 
                 return await userProblemRepository.DeleteAsync(userProblemToDelete);
             }
-        } 
+        }
+
+        public static async Task<bool> DeleteAsync(IList<UserProblem> userProblems)
+        {
+            using (var userProblemRepository = new UserProblemRepository())
+            {
+                return await userProblemRepository.DeleteAsync(userProblems);
+            }
+        }
     }
 }
