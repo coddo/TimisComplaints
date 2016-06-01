@@ -13,7 +13,7 @@
                 $location.path('/admin/dashboard');
             }, function (error) {
                 HelperService.StopLoading('authenticate');
-                HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+                HelperService.ShowMessage('alert-danger', "Nume de utilizator sau parola gresite");
             });
         }
     });
