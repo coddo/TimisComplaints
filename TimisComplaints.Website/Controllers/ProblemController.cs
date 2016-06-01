@@ -208,6 +208,26 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
+        [HttpPost]
+        [ActionName("Accept")]
+        public async Task<IHttpActionResult> AcceptProblem([FromBody] Problem model)
+        {
+            try
+            {
+                var result = await ProblemCore.AcceptProblem(model.Id);
+                if (result == null)
+                {
+                    return BadRequest("Error accepting problem");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
         #region Private methods
 
         private static async Task<IList<ProblemModel>> SortAndComputePoints(District district)

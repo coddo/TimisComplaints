@@ -14,5 +14,15 @@
             });
         }
 
+        $scope.acceptProblem = function (problemId) {
+            HelperService.StartLoading('acceptProblem');
+            API.acceptProblem({ id: problemId }, function (success) {
+                HelperService.StopLoading('acceptProblem');
+            }, function (error) {
+                HelperService.StopLoading('acceptProblem');
+                HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+            });
+        }
+
         init();
 });

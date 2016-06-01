@@ -65,5 +65,16 @@ namespace TimisComplaints.BusinessLogicLayer.Core
                 return await problemRepository.DeleteAsync(problemToDelete);
             }
         }
+
+        public static async Task<Problem> AcceptProblem(Guid id)
+        {
+            using (var problemRepository = new ProblemRepository())
+            {
+                var problem = await problemRepository.GetAsync(id);
+                problem.UserId = Guid.Empty;
+
+                return await problemRepository.UpdateAsync(problem);
+            }
+        }
     }
 }

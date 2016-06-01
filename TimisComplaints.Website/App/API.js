@@ -83,6 +83,11 @@
                 method: 'GET',
                 isArray: true
             },
+            acceptProblem: {
+                url: baseUrl + 'problem/Accept',
+                method: 'POST',
+                isArray: false  
+            },
 
             //Letters
             getAllLetters: {
