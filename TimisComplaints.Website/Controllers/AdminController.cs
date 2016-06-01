@@ -14,14 +14,15 @@ namespace TimisComplaints.Website.Controllers
 
         [HttpGet]
         [ActionName("Authenticate")]
-        public IHttpActionResult Authenticate(string username, string password)
+        public async Task<IHttpActionResult> Authenticate(string username, string password)
         {
             if (username != USERNAME || password != PASSWORD)
             {
+                await UnauthorizeUser().ConfigureAwait(false);
                 return Unauthorized();
-                
             }
 
+            await AuthorizeUser().ConfigureAwait(false);
             return Ok();
         }
 
@@ -31,6 +32,11 @@ namespace TimisComplaints.Website.Controllers
         {
             try
             {
+                if (!IsAuthenticated)
+                {
+                    return Unauthorized();
+                }
+
                 var problems = await ProblemCore.GetAllUnaccepted();
                 if (problems == null)
                 {

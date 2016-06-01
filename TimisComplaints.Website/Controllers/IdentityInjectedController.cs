@@ -25,19 +25,21 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
-        protected async Task Authorize()
+        protected async Task AuthorizeUser()
         {
-            
+            Identity.IsAuthenticated = true;
+            await UserCore.UpdateAsync(Identity).ConfigureAwait(false);
         }
 
-        protected async Task Unauthorize()
+        protected async Task UnauthorizeUser()
         {
-            
+            Identity.IsAuthenticated = false;
+            await UserCore.UpdateAsync(Identity).ConfigureAwait(false);
         }
 
         protected User Identity { get; }
 
-
+        protected bool IsAuthenticated => Identity.IsAuthenticated;
 
         private User CreateNewUser()
         {
