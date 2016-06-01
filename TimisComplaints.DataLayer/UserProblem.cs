@@ -23,7 +23,7 @@ namespace TimisComplaints.DataLayer
         public System.DateTime Date { get; set; }
     
         public virtual District District { get; set; }
-        public virtual User User { get; set; }
         public virtual Problem Problem { get; set; }
+        public virtual User User { get; set; }
     }
 }

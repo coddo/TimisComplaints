@@ -25,7 +25,19 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
+        protected async Task Authorize()
+        {
+            
+        }
+
+        protected async Task Unauthorize()
+        {
+            
+        }
+
         protected User Identity { get; }
+
+
 
         private User CreateNewUser()
         {

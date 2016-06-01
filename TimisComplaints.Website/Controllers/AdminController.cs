@@ -7,7 +7,7 @@ using TimisComplaints.Website.Models;
 
 namespace TimisComplaints.Website.Controllers
 {
-    public class AdminController : ApiController
+    public class AdminController : IdentityInjectedController
     {
         private const string USERNAME = "Botici";
         private const string PASSWORD = "Timis#123Complaints@";
@@ -19,6 +19,7 @@ namespace TimisComplaints.Website.Controllers
             if (username != USERNAME || password != PASSWORD)
             {
                 return Unauthorized();
+                
             }
 
             return Ok();
