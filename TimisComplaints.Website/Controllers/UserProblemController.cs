@@ -51,7 +51,7 @@ namespace TimisComplaints.Website.Controllers
 
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return InternalServerError();
             }
