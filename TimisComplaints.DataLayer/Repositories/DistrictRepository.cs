@@ -8,6 +8,16 @@ namespace TimisComplaints.DataLayer.Repositories
 {
     public class DistrictRepository : BaseRepository<District>
     {
+        public DistrictRepository()
+        {
+            
+        }
+
+        public DistrictRepository(Entities context) : base(context)
+        {
+            
+        } 
+
         public async Task<IList<Problem>> GetProblemsAsync(Guid districtId)
         {
             var district = await GetAsync(districtId, new[]

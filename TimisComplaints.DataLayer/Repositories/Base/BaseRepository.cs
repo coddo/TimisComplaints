@@ -9,6 +9,16 @@ namespace TimisComplaints.DataLayer.Repositories.Base
     public abstract class BaseRepository<T> : GenericDataRepository<T>
         where T : class, IEntity, new()
     {
+        protected BaseRepository()
+        {
+            
+        }
+
+        protected BaseRepository(Entities context)
+        {
+            Context = context;
+        } 
+
         public virtual async Task<IList<T>> GetAllAsync(IList<string> navigationProperties = null)
         {
             return await FetchAllAsync(navigationProperties);

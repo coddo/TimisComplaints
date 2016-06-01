@@ -94,34 +94,6 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
-        [HttpGet]
-        [ActionName("GetAllUnaccepted")]
-        public async Task<IHttpActionResult> GetAllUnaccepted()
-        {
-            try
-            {
-                var problems = await ProblemCore.GetAllUnaccepted();
-                if (problems == null)
-                {
-                    return BadRequest("Invalid Id or no problems found");
-                }
-
-                var model = problems.Select(p => new ProblemModel
-                {
-                    Id = p.Id,
-                    UserId = p.UserId,
-                    Name = p.Name,
-                    Description = p.Description
-                }).ToArray();
-
-                return Ok(model);
-            }
-            catch (Exception ex)
-            {
-                return InternalServerError(ex);
-            }
-        }
-
         [HttpPost]
         [ActionName("Create")]
         public async Task<IHttpActionResult> Create([FromBody] ProblemModel model)
@@ -198,6 +170,27 @@ namespace TimisComplaints.Website.Controllers
                 if (!result)
                 {
                     return BadRequest("Error deleting problem");
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpPost]
+        [ActionName("Accept")]
+        public async Task<IHttpActionResult> Accept([FromBody] Problem model)
+        {
+            try
+            {
+                var result = await ProblemCore.AcceptProblem(model.Id).ConfigureAwait(false);
+
+                if (result == null)
+                {
+                    return BadRequest("Error accepting problem");
                 }
 
                 return Ok();

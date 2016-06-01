@@ -155,6 +155,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\IdentityInjectedController.cs" />
     <Compile Include="Controllers\DistrictController.cs" />
     <Compile Include="Controllers\LetterController.cs" />
@@ -167,6 +168,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignUserProblemsModel.cs" />
+    <Compile Include="Models\AuthenticationModel.cs" />
     <Compile Include="Models\DistrictModel.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\LetterModel.cs" />
@@ -179,9 +182,12 @@
   <ItemGroup>
     <Content Include="App\API.js" />
     <Content Include="App\app.js" />
+    <Content Include="App\Controllers\DashboardController.js" />
     <Content Include="App\Controllers\DistrictController.js" />
     <Content Include="App\Controllers\IndexController.js" />
     <Content Include="App\Controllers\LetterController.js" />
+    <Content Include="App\Controllers\ProblemController.js" />
+    <Content Include="App\Controllers\AuthenticationController.js" />
     <Content Include="App\Services\AuthService.js" />
     <Content Include="App\Services\HelperService.js" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -271,9 +277,13 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Dashboard.html" />
     <Content Include="Views\District.html" />
+    <Content Include="Views\Inexistent.html" />
     <Content Include="Views\Index.html" />
     <Content Include="Views\Letter.html" />
+    <Content Include="Views\Problem.html" />
+    <Content Include="Views\Authentication.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

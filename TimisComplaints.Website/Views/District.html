@@ -3,10 +3,11 @@
     <h2>
         Top probleme ale cartierului <b>{{districtName}}</b>
     </h2>
-    <h4>Reordonează după priorități!</h4>
+    <h4><b>Reordonează după priorități!</b></h4>
     <div class="my-problems-box" id="my-problem-box">
-        <div ng-show="selectedProblems==null || selectedProblems.length<1" style="padding:15px;color:grey;font-size:24px;display:inline-block">
-            Începe prin a adăuga probleme de mai jos!
+        <div ng-show="selectedProblems==null || selectedProblems.length<1" style="padding: 15px; color: #616161; font-size: 24px; display: inline-block">
+            <p><b>Începe prin a adăuga probleme de mai jos!</b></p>
+            <p><b>La încheierea operațiilor veți vedea ordinea problemelor din cartierul dumneavoastră.</b></p>
         </div>
 
         <div class="list-group my-problems-list" ui-sortable="sortableOptions" ng-model="selectedProblems" ng-change="problemsChanged()">
@@ -19,12 +20,15 @@
             </div>
         </div>
     </div>
+    <br/>
+
+    <button ng-href="/probleme/{{districtId}}/{{districtName}}" class="btn btn-primary" ng-click="confirmSelectedProblems()">Confirmă alegerea</button>
 
     <br />
 
     <h2>Alege din lista de probleme</h2>
     <div class="list-group all-problems">
-        <div ng-repeat="prb in problems | orderBy:'-points'" class="list-group-item problem" ng-hide="prb.selected">
+        <div ng-repeat="prb in problems" class="list-group-item problem" ng-hide="prb.selected">
             <button ng-hide="prb.selected" ng-click="selectProblem(prb, $event)" class="btn btn-primary problem-btn">Adaugă problema!</button>
             <!--Not applicable anymore-->
             <!--<button ng-show="prb.selected" ng-click="removeProblem(prb, $event)" class="btn btn-danger problem-btn">Șterge problema!</button>-->
@@ -32,7 +36,7 @@
             <h4 class="list-group-item-heading">{{::prb.name}}</h4>
             <p class="list-group-item-text">{{::prb.description}} </p>
 
-            <uib-progressbar value="maxPoints>0 ? prb.points*100/maxPoints : 0" type="danger"></uib-progressbar>
+            <!--<uib-progressbar value="maxPoints>0 ? prb.points*100/maxPoints : 0" type="danger"></uib-progressbar>-->
         </div>
     </div>
 

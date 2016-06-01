@@ -9,13 +9,13 @@
         <EntityTypeShape EntityType="TimisComplaintsModel.Letter" Width="1.5" PointX="1.125" PointY="1" />
         <EntityTypeShape EntityType="TimisComplaintsModel.UserProblem" Width="1.5" PointX="9.625" PointY="2.625" />
         <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Districts" />
-        <EntityTypeShape EntityType="TimisComplaintsModel.User" Width="1.5" PointX="1.375" PointY="4.625" />
-        <AssociationConnector Association="TimisComplaintsModel.FK_Letters_Users" />
-        <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Users" />
         <EntityTypeShape EntityType="TimisComplaintsModel.Problem" Width="1.5" PointX="4" PointY="1.375" />
-        <AssociationConnector Association="TimisComplaintsModel.FK_Problems_Users" />
         <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Problems" />
         <AssociationConnector Association="TimisComplaintsModel.DistrictProblemAssignments" />
+        <EntityTypeShape EntityType="TimisComplaintsModel.User" Width="1.5" PointX="1.375" PointY="4.625" />
+        <AssociationConnector Association="TimisComplaintsModel.FK_Letters_Users" />
+        <AssociationConnector Association="TimisComplaintsModel.FK_Problems_Users" />
+        <AssociationConnector Association="TimisComplaintsModel.FK_UserProblems_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -28,7 +28,7 @@ namespace TimisComplaints.DataLayer
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Letter> Letters { get; set; }
         public virtual DbSet<UserProblem> UserProblems { get; set; }
-        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Problem> Problems { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

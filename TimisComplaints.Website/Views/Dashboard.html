@@ -1,0 +1,13 @@
+﻿<div class="container">
+    <h2>Probleme neacceptate</h2>
+    <div class="list-group all-problems">
+	    <div ng-repeat="prb in unacceptedProblems" class="list-group-item problem">
+			<div class="problem-btn">
+				<button ng-click="acceptProblem(prb)" class="btn btn-primary">Acceptă problema</button>
+				<button ng-click="deleteProblem(prb)" class="btn btn-danger">Șterge problema</button>
+			</div>
+		    <h4 class="list-group-item-heading">{{::prb.name}}</h4>
+		    <p class="list-group-item-text">{{::prb.description}}</p>
+	    </div>
+    </div>
+</div>

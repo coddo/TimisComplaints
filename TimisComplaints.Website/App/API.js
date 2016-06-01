@@ -66,6 +66,11 @@
                 method: 'POST',
                 isArray: true
             },
+            confirmUserProblems: {
+                url: baseUrl + 'userProblem/assign',
+                method: 'POST',
+                isArray: false
+            },
 
             //User created problems
             createProblem: {
@@ -78,6 +83,21 @@
                 method: 'GET',
                 isArray: true
             },
+            getAllUnacceptedProblems: {
+                url: baseUrl + 'admin/GetAllUnaccepted',
+                method: 'GET',
+                isArray: true
+            },
+            acceptProblem: {
+                url: baseUrl + 'problem/Accept',
+                method: 'POST',
+                isArray: false  
+            },
+			   deleteProblem: {
+				   url: baseUrl + "problem/Delete",
+					method: 'POST',
+					isArray: false
+			   },
 
             //Letters
             getAllLetters: {
@@ -102,6 +122,12 @@
             //    isArray:false
             //},
 
+            //Admin
+            authenticate: {
+                url: baseUrl + 'admin/Authenticate',
+                method: 'POST',
+                isArray: false
+            }
 
 
         });
