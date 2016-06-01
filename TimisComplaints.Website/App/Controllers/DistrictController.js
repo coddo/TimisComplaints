@@ -64,63 +64,32 @@
 
         init();
 
-       
+
 
         $scope.selectProblem = function (problem, $event) {
-
             var existingProblem = $filter('filter')($scope.selectedProblems, { problemId: problem.id }, true);
             if (existingProblem == null || existingProblem.length == 0) {
-
-                HelperService.StartLoading('addProblem');
-                API.addProblem({
+                var selectedProblem = {
                     problemId: problem.id,
                     districtId: $scope.districtId,
+                    name: problem.name,
+                    description: problem.description,
                     order: $scope.selectedProblems.length
-                }, function (success) {
-                    $scope.selectedProblems.push(success);
-                    success.name = problem.name;
-                    success.description = problem.description;
-
-                    problem.selected = true;
-
-                    HelperService.StopLoading('addProblem');
-                }, function (error) {
-                    HelperService.StopLoading('addProblem');
-                });
+                };
+                $scope.selectedProblems.push(selectedProblem);
+                problem.selected = true;
             }
-
-
-            //if ($scope.selectedProblems.length > 1) {
-            //    var scrollHeight = $($event.target).parent().innerHeight();
-            //    window.scrollBy(0, scrollHeight);
-            //}
         }
 
         $scope.removeProblem = function (problem, $event) {
             var index = $scope.selectedProblems.indexOf(problem);
             if (index >= 0) {
+                $scope.selectedProblems.splice(index, 1);
 
-                HelperService.StartLoading('removeProblem');
-                API.removeProblem({ id: problem.id }, function (success) {
-                    $scope.selectedProblems.splice(index, 1);
-
-                    var originalProblem = $filter('filter')($scope.problems, { id: problem.problemId }, true);
-                    if (originalProblem != null && originalProblem.length == 1) {
-                        originalProblem[0].selected = false;
-                    }
-
-                    $scope.problemsChanged();
-
-                    HelperService.StopLoading('removeProblem');
-                }, function (error) {
-                    HelperService.StopLoading('removeProblem');
-                });
-
-
-                //if ($event && $scope.selectedProblems.length > 0) {
-                //    var scrollHeight = $($event.target).parent().innerHeight();
-                //    window.scrollBy(0, -scrollHeight);
-                //}
+                var originalProblem = $filter('filter')($scope.problems, { id: problem.problemId }, true);
+                if (originalProblem != null && originalProblem.length == 1) {
+                    originalProblem[0].selected = false;
+                }
             }
         }
 
