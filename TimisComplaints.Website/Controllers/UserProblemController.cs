@@ -13,16 +13,11 @@ namespace TimisComplaints.Website.Controllers
     {
         [HttpPost]
         [ActionName("Assign")]
-        public async Task<IHttpActionResult> Assign([FromBody] ICollection<UserProblemModel> modelCollection)
+        public async Task<IHttpActionResult> Assign([FromBody] AssignUserProblemsModel model)
         {
             try
             {
-                if (modelCollection == null || modelCollection.Count == 0)
-                {
-                    return BadRequest();
-                }
-
-                var districtId = modelCollection.First().Id;
+                var districtId = model.DistrictId;
 
                 var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, districtId).ConfigureAwait(false);
                 if (userProblems != null && userProblems.Count > 0)
@@ -34,13 +29,18 @@ namespace TimisComplaints.Website.Controllers
                     }
                 }
 
-                var newUserProblems = modelCollection.Select(model => new UserProblem
+                if (model.UserProblems.Count == 0)
+                {
+                    return Ok();
+                }
+
+                var newUserProblems = model.UserProblems.Select(userProblemModel => new UserProblem
                 {
                     UserId = Identity.Id,
-                    ProblemId = model.ProblemId,
-                    DistrictId = model.DistrictId,
+                    ProblemId = userProblemModel.ProblemId,
+                    DistrictId = districtId,
                     Date = DateTime.Now,
-                    Order = model.Order
+                    Order = userProblemModel.Order
                 }).ToArray();
 
                 var createdProblems = await UserProblemCore.CreateAsync(newUserProblems).ConfigureAwait(false);
