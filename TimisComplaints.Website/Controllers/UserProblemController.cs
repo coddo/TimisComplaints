@@ -12,6 +12,48 @@ namespace TimisComplaints.Website.Controllers
     public class UserProblemController : IdentityInjectedController
     {
         [HttpPost]
+        [ActionName("Assign")]
+        public async Task<IHttpActionResult> Assign([FromBody] ICollection<UserProblemModel> modelCollection)
+        {
+            try
+            {
+                var districtId = modelCollection?.First().Id;
+                if (districtId == null)
+                {
+                    return BadRequest();
+                }
+
+                var userProblems = await UserProblemCore.GetUserProblemsAsync(Identity.Id, (Guid) districtId).ConfigureAwait(false);
+                var result = await UserProblemCore.DeleteAsync(userProblems).ConfigureAwait(false);
+                if (!result)
+                {
+                    return InternalServerError();
+                }
+
+                var newUserProblems = modelCollection.Select(model => new UserProblem
+                {
+                    UserId = Identity.Id,
+                    ProblemId = model.ProblemId,
+                    DistrictId = model.DistrictId,
+                    Date = DateTime.Now,
+                    Order = model.Order
+                }).ToArray();
+
+                var createdProblems = await UserProblemCore.CreateAsync(newUserProblems).ConfigureAwait(false);
+                if (createdProblems == null)
+                {
+                    return InternalServerError();
+                }
+
+                return Ok(createdProblems);
+            }
+            catch (Exception)
+            {
+                return InternalServerError();
+            }
+        }
+
+        [HttpPost]
         [ActionName("Create")]
         public async Task<IHttpActionResult> Create([FromBody] UserProblemModel model)
         {
