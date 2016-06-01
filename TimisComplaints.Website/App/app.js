@@ -13,10 +13,10 @@
                 templateUrl: '/Views/District.html',
                 controller: 'DistrictController'
             })
-            .when('/scrisoare', {
-                templateUrl: '/Views/Letter.html',
-                controller: 'LetterController'
-            })
+            //.when('/scrisoare', {
+            //    templateUrl: '/Views/Letter.html',
+            //    controller: 'LetterController'
+            //})
             .when('/probleme/:districtId/:districtName', {
                 templateUrl: '/Views/Problem.html',
                 controller: 'ProblemController'
