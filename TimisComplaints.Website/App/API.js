@@ -78,6 +78,11 @@
                 method: 'GET',
                 isArray: true
             },
+            getAllUnacceptedProblems: {
+                url: baseUrl + 'problem/GetAllUnaccepted',
+                method: 'GET',
+                isArray: true
+            },
 
             //Letters
             getAllLetters: {

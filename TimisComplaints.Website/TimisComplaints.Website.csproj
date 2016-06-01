@@ -179,6 +179,7 @@
   <ItemGroup>
     <Content Include="App\API.js" />
     <Content Include="App\app.js" />
+    <Content Include="App\Controllers\DashboardController.js" />
     <Content Include="App\Controllers\DistrictController.js" />
     <Content Include="App\Controllers\IndexController.js" />
     <Content Include="App\Controllers\LetterController.js" />
@@ -272,6 +273,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Views\Dashboard.html" />
     <Content Include="Views\District.html" />
     <Content Include="Views\Index.html" />
     <Content Include="Views\Letter.html" />

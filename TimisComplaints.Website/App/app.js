@@ -21,6 +21,10 @@
                 templateUrl: '/Views/Problem.html',
                 controller: 'ProblemController'
             })
+            .when('/admin', {
+                templateUrl: '/Views/Dashboard.html',
+                controller: 'DashboardController'
+            })
             .otherwise({
                 templateUrl: '/Views/Inexistent.html',
             });
