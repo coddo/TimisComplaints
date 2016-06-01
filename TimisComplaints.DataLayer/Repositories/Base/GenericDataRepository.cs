@@ -92,7 +92,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
 
         protected async Task RemoveAsync(T item)
         {
-            if (Context.Entry(item).State == EntityState.Detached)
+            if (mContext.Entry(item).State == EntityState.Detached)
             {
                 mDbSet.Attach(item);
             }
@@ -104,13 +104,17 @@ namespace TimisComplaints.DataLayer.Repositories.Base
 
         protected async Task RemoveAsync(IList<T> items)
         {
+            mContext.Configuration.AutoDetectChangesEnabled = false;
+
             foreach (var item in items)
             {
-                if (Context.Entry(item).State == EntityState.Detached)
+                if (mContext.Entry(item).State == EntityState.Detached)
                 {
                     mDbSet.Attach(item);
                 }
             }
+
+            mContext.Configuration.AutoDetectChangesEnabled = true;
 
             mDbSet.RemoveRange(items);
 
