@@ -128,7 +128,7 @@
         $scope.confirmSelectedProblems = function () {
             HelperService.StartLoading('confirmSelectedProblems');
             API.confirmUserProblems($scope.selectedProblems, function(success) {
-                HelperService.StartLoading('confirmSelectedProblems');
+                HelperService.StopLoading('confirmSelectedProblems');
                 $location.path('/probleme/' + $scope.districtId + '/' + $scope.districtName);
             }, function (error) {
                 HelperService.StopLoading('confirmSelectedProblems');
