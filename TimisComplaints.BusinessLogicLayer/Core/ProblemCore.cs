@@ -68,13 +68,22 @@ namespace TimisComplaints.BusinessLogicLayer.Core
 
         public static async Task<Problem> AcceptProblem(Guid id)
         {
-            using (var problemRepository = new ProblemRepository())
+            using (var context = new Entities())
             {
+                var problemRepository = new ProblemRepository(context);
+                var districtRepository = new DistrictRepository(context);
+
+                var districts = await districtRepository.GetAllAsync().ConfigureAwait(false);
                 var problem = await problemRepository.GetAsync(id, new[]
                 {
                     nameof(Problem.Districts)
                 });
+
                 problem.UserId = Guid.Empty;
+                foreach (var district in districts)
+                {
+                    problem.Districts.Add(district);
+                }
 
                 return await problemRepository.UpdateAsync(problem);
             }

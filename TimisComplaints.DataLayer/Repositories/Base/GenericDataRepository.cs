@@ -11,16 +11,29 @@ namespace TimisComplaints.DataLayer.Repositories.Base
     public abstract class GenericDataRepository<T> : IDisposable
         where T : class, IEntity, new()
     {
-        private readonly Entities mContext;
-        private readonly DbSet<T> mDbSet;
+        private Entities mContext;
+        private DbSet<T> mDbSet;
 
         protected GenericDataRepository()
         {
-            mContext = new Entities();
-            mDbSet = mContext.Set<T>();
+            Context = new Entities();
         }
 
-        protected Entities Context => mContext;
+        protected Entities Context
+        {
+            get { return mContext; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new NullReferenceException("Tried to assign null context");
+                }
+
+                value.Configuration.LazyLoadingEnabled = false;
+                mContext = value;
+                mDbSet = mContext.Set<T>();
+            }
+        }
 
         protected async Task<IList<T>> FetchAllAsync(IList<string> navigationProperties = null)
         {

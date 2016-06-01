@@ -8,6 +8,16 @@ namespace TimisComplaints.DataLayer.Repositories
 {
     public class UserProblemRepository : BaseRepository<UserProblem>
     {
+        public UserProblemRepository()
+        {
+
+        }
+
+        public UserProblemRepository(Entities context) : base(context)
+        {
+
+        }
+
         public async Task<bool> UpdateOrderAsync(IList<UserProblem> userProblems)
         {
             foreach (var userProblem in userProblems)

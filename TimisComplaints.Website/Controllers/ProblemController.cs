@@ -210,15 +210,11 @@ namespace TimisComplaints.Website.Controllers
 
         [HttpPost]
         [ActionName("Accept")]
-        public async Task<IHttpActionResult> AcceptProblem([FromBody] Problem model)
+        public async Task<IHttpActionResult> Accept([FromBody] Problem model)
         {
             try
             {
-                var result = await ProblemCore.AcceptProblem(model.Id);
-
-                //Link the problem to all the districts
-                result.Districts = await DistrictCore.GetAllAsync();
-                result = await ProblemCore.UpdateAsync(result);
+                var result = await ProblemCore.AcceptProblem(model.Id).ConfigureAwait(false);
 
                 if (result == null)
                 {
