@@ -12,11 +12,11 @@ namespace TimisComplaints.Website.Controllers
         private const string USERNAME = "Botici";
         private const string PASSWORD = "Timis#123Complaints@";
 
-        [HttpGet]
+        [HttpPost]
         [ActionName("Authenticate")]
-        public async Task<IHttpActionResult> Authenticate(string username, string password)
+        public async Task<IHttpActionResult> Authenticate([FromBody] AuthenticationModel model)
         {
-            if (username != USERNAME || password != PASSWORD)
+            if (model.Username != USERNAME || model.Password != PASSWORD)
             {
                 await UnauthorizeUser().ConfigureAwait(false);
                 return Unauthorized();
