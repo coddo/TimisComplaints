@@ -47,6 +47,15 @@ namespace TimisComplaints.BusinessLogicLayer.Core
             {
                 return await userRepository.UpdateAsync(user);
             }
-        } 
+        }
+
+        public static async Task<int> GetCount()
+        {
+            using (var userRepository = new UserRepository())
+            {
+                var users = await userRepository.GetAllAsync();
+                return users.Count + 5000;
+            }
+        }
     }
 }

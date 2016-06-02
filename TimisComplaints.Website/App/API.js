@@ -42,6 +42,11 @@
                 //params: { districtId: '@districtId' },
                 isArray: true
             },
+            getCount: {
+                url: baseUrl + 'account/GetCount',
+                method: 'GET',
+                isArray: false
+            },
 
             //User problems
             getUserProblems: {

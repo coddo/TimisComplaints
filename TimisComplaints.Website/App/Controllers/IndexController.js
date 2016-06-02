@@ -11,4 +11,11 @@
             HelperService.StopLoading('loadTest');
         });
 
-    });
+        HelperService.StartLoading('getCount');
+        API.getCount(function (success) {
+            $scope.usersCount = success;
+            HelperService.StopLoading('getCount');
+        }, function (error) {
+            HelperService.StopLoading('getCount');
+        });
+});
