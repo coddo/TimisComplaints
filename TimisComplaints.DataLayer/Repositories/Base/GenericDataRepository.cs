@@ -14,9 +14,13 @@ namespace TimisComplaints.DataLayer.Repositories.Base
         private Entities mContext;
         private DbSet<T> mDbSet;
 
+        private bool mIsEntityTrackingOn;
+        private Func<IList<string>, IQueryable<T>> mQueryGenerator;
+
         protected GenericDataRepository()
         {
             Context = new Entities();
+            IsEntityTrackingOn = false;
         }
 
         protected Entities Context
@@ -35,9 +39,20 @@ namespace TimisComplaints.DataLayer.Repositories.Base
             }
         }
 
+        public bool IsEntityTrackingOn
+        {
+            get { return mIsEntityTrackingOn; }
+            set
+            {
+                mIsEntityTrackingOn = value;
+
+                mQueryGenerator = mIsEntityTrackingOn ? (Func<IList<string>, IQueryable<T>>)GenerateQuery : GenerateNonTrackingQuery;
+            }
+        }
+
         protected async Task<IList<T>> FetchAllAsync(IList<string> navigationProperties = null)
         {
-            var dbQuery = GenerateQuery(navigationProperties);
+            var dbQuery = mQueryGenerator.Invoke(navigationProperties);
 
             var list = await dbQuery.ToListAsync();
             return list;
@@ -45,7 +60,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
 
         protected async Task<IList<T>> FetchListAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
-            var dbQuery = GenerateQuery(navigationProperties);
+            var dbQuery = mQueryGenerator.Invoke(navigationProperties);
 
             var list = await dbQuery.Where(@where).ToListAsync();
 
@@ -54,7 +69,7 @@ namespace TimisComplaints.DataLayer.Repositories.Base
 
         protected async Task<T> FetchSingleAsync(Expression<Func<T, bool>> where, IList<string> navigationProperties = null)
         {
-            var dbQuery = GenerateQuery(navigationProperties);
+            var dbQuery = mQueryGenerator.Invoke(navigationProperties);
 
             var item = await dbQuery.FirstOrDefaultAsync(@where);
 
@@ -135,6 +150,13 @@ namespace TimisComplaints.DataLayer.Repositories.Base
         }
 
         #region Private methods
+
+        private IQueryable<T> GenerateNonTrackingQuery(IList<string> navigationProperties)
+        {
+            IQueryable<T> dbQuery = mDbSet.AsNoTracking();
+
+            return ApplyNavigationProperties(dbQuery, navigationProperties);
+        }
 
         private IQueryable<T> GenerateQuery(IList<string> navigationProperties)
         {

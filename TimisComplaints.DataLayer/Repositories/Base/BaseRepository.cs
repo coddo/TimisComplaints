@@ -11,13 +11,13 @@ namespace TimisComplaints.DataLayer.Repositories.Base
     {
         protected BaseRepository()
         {
-            
         }
 
         protected BaseRepository(Entities context)
         {
             Context = context;
-        } 
+            IsEntityTrackingOn = true;
+        }
 
         public virtual async Task<IList<T>> GetAllAsync(IList<string> navigationProperties = null)
         {
