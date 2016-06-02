@@ -45,7 +45,7 @@ namespace TimisComplaints.Website.Controllers
             {
                 var result = await UserCore.GetCount();
 
-                return Ok(result);
+                return Ok(new { value = result });
             }
             catch (Exception ex)
             {

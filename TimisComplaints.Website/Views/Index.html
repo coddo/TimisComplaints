@@ -10,11 +10,19 @@
             In caz ca aveti si alte probleme va asteptam sa le descrieti.
         </b>
     </p>
-    <br />
+    <br/>
     <div ng-repeat="district in AllDistricts" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 district">
         <a href="/cartier/{{district.id}}/{{district.name}}" class="btn btn-primary btn-lg btn-district"> {{district.name}}</a>
     </div>
 </div>
+
+<br/>
+<div class="container">
+    <div class="pull-right">
+        <p style="font-size: 18px"><b>Număr de vizitatori: {{usersCount}}</b></p>
+    </div>
+</div>
+
 <!--<hr />
 <div id="index-letters-block" class="container index-letters">
     <h1>Scrisorile publicului</h1>

@@ -10,10 +10,10 @@
         }, function (error) {
             HelperService.StopLoading('loadTest');
         });
-
+        
         HelperService.StartLoading('getCount');
         API.getCount(function (success) {
-            $scope.usersCount = success;
+            $scope.usersCount = success.value;
             HelperService.StopLoading('getCount');
         }, function (error) {
             HelperService.StopLoading('getCount');
