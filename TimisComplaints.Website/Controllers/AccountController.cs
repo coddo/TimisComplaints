@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Web.Http;
+using TimisComplaints.BusinessLogicLayer.Core;
 using TimisComplaints.Website.Models;
 
 namespace TimisComplaints.Website.Controllers
@@ -28,6 +30,22 @@ namespace TimisComplaints.Website.Controllers
                 };
 
                 return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
+
+        [HttpGet]
+        [ActionName("GetCount")]
+        public async Task<IHttpActionResult> GetCount()
+        {
+            try
+            {
+                var result = await UserCore.GetCount();
+
+                return Ok(new { value = result });
             }
             catch (Exception ex)
             {
