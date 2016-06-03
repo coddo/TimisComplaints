@@ -30,7 +30,7 @@
 
         $scope.deleteProblem = function (problem) {
         	HelperService.StartLoading('deleteProblem');
-        	API.acceptProblem({ id: problem.id }, function (success) {
+        	API.deleteProblem({ id: problem.id }, function (success) {
 
         		var index = $scope.unacceptedProblems.indexOf(problem);
         		$scope.unacceptedProblems.splice(index, 1);
