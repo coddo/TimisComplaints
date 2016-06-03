@@ -160,7 +160,7 @@ namespace TimisComplaints.Website.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpDelete]
         [ActionName("Delete")]
         public async Task<IHttpActionResult> Delete(Guid id)
         {
