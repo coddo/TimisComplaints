@@ -100,7 +100,7 @@ namespace TimisComplaints.Website.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (!ModelState.IsValid || string.IsNullOrWhiteSpace(model.Name) || string.IsNullOrWhiteSpace(model.Description))
                 {
                     return BadRequest(ModelState);
                 }
