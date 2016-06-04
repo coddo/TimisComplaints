@@ -1,17 +1,25 @@
 ﻿angular
     .module('timisComplaints')
-    .controller('DashboardController', function (AuthService, $routeParams, $scope, API, HelperService, $timeout, $filter) {
+    .controller('DashboardController', function (AuthService, $routeParams, $scope, API, HelperService, $location) {
         $scope.unacceptedProblems = [];
 
         function init() {
-            HelperService.StartLoading('loadUnacceptedProblems');
-            API.getAllUnacceptedProblems({}, function (success) {
-                $scope.unacceptedProblems = success;
-                HelperService.StopLoading('loadUnacceptedProblems');
+            HelperService.StartLoading('checkAuthorization');
+            API.checkAuthorization(function (success) {
+                HelperService.StopLoading('checkAuthorization');
+
+                HelperService.StartLoading('loadUnacceptedProblems');
+                API.getAllUnacceptedProblems({}, function (success) {
+                    $scope.unacceptedProblems = success;
+                    HelperService.StopLoading('loadUnacceptedProblems');
+                }, function (error) {
+                    HelperService.StopLoading('loadUnacceptedProblems');
+                    HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
+                });
             }, function (error) {
-                HelperService.StopLoading('loadUnacceptedProblems');
-                HelperService.ShowMessage('alert-danger', "Verificați conexiunea la internet și reîncărcați pagina!");
-            });
+                HelperService.StopLoading('checkAuthorization');
+                $location.path('/admin');
+            });          
         }
 
         $scope.acceptProblem = function (problem) {
