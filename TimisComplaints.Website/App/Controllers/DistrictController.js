@@ -115,6 +115,9 @@
 
                 HelperService.StopLoading('sendNewProblem');
             }, function (error) {
+                $scope.newProblem = { name: null, description: null };
+
+                HelperService.ShowMessage('alert-danger', 'Problema nu a putut fi trimisă');
                 HelperService.StopLoading('sendNewProblem');
             });
         }
