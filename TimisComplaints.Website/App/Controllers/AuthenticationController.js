@@ -6,6 +6,14 @@
             password: ''
         };
 
+        HelperService.StartLoading('checkAuthorization');
+        API.checkAuthorization(function (success) {
+            HelperService.StopLoading('checkAuthorization');
+            $location.path('/admin/dashboard');
+        }, function (error) {
+            HelperService.StopLoading('checkAuthorization');
+        });
+
         $scope.authenticate = function () {
             HelperService.StartLoading('authenticate');
             API.authenticate($scope.user, function (success) {
