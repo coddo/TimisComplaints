@@ -132,6 +132,11 @@
                 url: baseUrl + 'admin/Authenticate',
                 method: 'POST',
                 isArray: false
+            },
+            checkAuthorization: {
+                url: baseUrl + 'admin/CheckAuthorization',
+                method: 'GET',
+                isArray: false
             }
 
 

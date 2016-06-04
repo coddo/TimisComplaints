@@ -58,5 +58,24 @@ namespace TimisComplaints.Website.Controllers
                 return InternalServerError(ex);
             }
         }
+
+        [HttpGet]
+        [ActionName("CheckAuthorization")]
+        public IHttpActionResult CheckAuthorization()
+        {
+            try
+            {
+                if (!IsAuthenticated)
+                {
+                    return Unauthorized();
+                }
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
+        }
     }
 }
