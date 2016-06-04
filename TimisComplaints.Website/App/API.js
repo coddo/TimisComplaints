@@ -100,7 +100,7 @@
             },
 			   deleteProblem: {
 				   url: baseUrl + "problem/Delete",
-					method: 'POST',
+					method: 'DELETE',
 					isArray: false
 			   },
 
